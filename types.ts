@@ -18,21 +18,27 @@ export interface Simulation {
   id: string;
   startTime: number;
   duration: number;
-  status: 'RUNNING' | 'COMPLETED';
+  status: 'RUNNING' | 'COMPLETED' | 'FAILED';
   valuation?: string;
+  load: number;
+  threatLevel: 'LOW' | 'MED' | 'HIGH';
 }
 
 export interface ProjectFile {
+  id: string;
   name: string;
   language: string;
   content: string;
+  lastModified: string;
 }
 
 export interface WorkflowTask {
   id: string;
   title: string;
+  description: string;
   status: 'TODO' | 'IN_PROGRESS' | 'DONE';
   priority: 'LOW' | 'HIGH' | 'CRITICAL';
+  assignee: string;
 }
 
 export interface VaultEntry {
