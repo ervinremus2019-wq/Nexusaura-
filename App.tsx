@@ -86,12 +86,14 @@ const App: React.FC = () => {
             <h1 className="text-rose-500 font-bold tracking-tighter text-xl mono">OFFICIAL USAGE RULES</h1>
             <p className="text-[10px] text-slate-400 mono uppercase tracking-widest">© Ervin Remus Radosavlevici</p>
           </div>
-          <div className="max-h-60 overflow-y-auto text-[11px] text-slate-300 mono text-left p-4 bg-slate-900/50 rounded-xl space-y-3 border border-slate-800">
-            <p><span className="text-rose-400 font-bold">RULE 1: NOT FREE.</span> MIT with share half. I do not give this for free.</p>
-            <p><span className="text-rose-400 font-bold">RULE 2: PROFIT USE.</span> If you make money, I want half (50%).</p>
-            <p><span className="text-rose-400 font-bold">RULE 6: PROSECUTION.</span> If used without asking, you will be prosecuted.</p>
-            <p><span className="text-rose-400 font-bold">RULE 8: ADVANCE PAYMENT.</span> Required for use.</p>
-            <p className="pt-2 text-rose-500/80 italic font-bold">LEGAL NOTICE: Any use means automatic acceptance of all rules.</p>
+          <div className="max-h-60 overflow-y-auto text-[11px] text-slate-300 mono text-left p-4 bg-slate-900/50 rounded-xl space-y-3 border border-slate-800 scrollbar-hide">
+            <p><span className="text-rose-400 font-bold">Rule 1 — Not Free:</span> MIT with share half. You think I give this to you for free? This is NOT free.</p>
+            <p><span className="text-rose-400 font-bold">Rule 2 — Profit Use:</span> If you make money, I want Half.</p>
+            <p><span className="text-rose-400 font-bold">Rule 3 — Developers:</span> Thieves play and get 20 years prison.</p>
+            <p><span className="text-rose-400 font-bold">Rule 5 — Mandatory Profit Sharing:</span> Automatic sharing to save you from 20 years prison. If you use me, you must share profit here. Ask Ervin Radosavlevici for use if not prosecuted will you be.</p>
+            <p><span className="text-rose-400 font-bold">Rule 6 — Share Ratio:</span> Half / half / half. If without asking, you will be prosecuted.</p>
+            <p><span className="text-rose-400 font-bold">Rule 8 — Payment:</span> Advance payment is required to use it.</p>
+            <p className="pt-2 text-rose-500/80 italic font-bold">LEGAL NOTICE: Any use means automatic acceptance of all rules. Prosecution enabled.</p>
           </div>
           <button 
             onClick={() => setHasAcceptedTerms(true)}
@@ -99,7 +101,7 @@ const App: React.FC = () => {
           >
             I Accept / Automatic Acceptance
           </button>
-          <p className="text-[8px] text-slate-600 mono uppercase">If you do not agree, do not use it.</p>
+          <p className="text-[8px] text-slate-600 mono uppercase">If you do not agree, do not use it. Theft is prosecuted.</p>
         </div>
       </div>
     );
@@ -185,7 +187,7 @@ const App: React.FC = () => {
           OWNER: ERVIN REMUS RADOSAVLEVICI | DOB: 01/09/1987 | SECURITY: NDA 78B FINE
         </p>
         <p className="text-[7px] text-slate-700 mono leading-none uppercase font-bold text-rose-500/80">
-          PROFIT SHARE: 50% MANDATORY | ADVANCE PAYMENT REQUIRED
+          PROFIT SHARE: 50% MANDATORY | ADVANCE PAYMENT REQUIRED | RULE 6 APPLIES
         </p>
       </footer>
 

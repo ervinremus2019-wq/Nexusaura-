@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 
 const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
@@ -6,8 +5,8 @@ const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 export const getAuroraResponse = async (query: string, isAdmin: boolean) => {
   const ai = getAI();
   const systemInstruction = isAdmin 
-    ? "You are Aurora, the primary AI for NEXUS SOVEREIGN AURA Production. You are 100% accurate, professional, and loyal to Ervin Remus Radosavlevici. Access to the production vault is granted."
-    : "You are Aurora, a decoy assistant for NEXUS SOVEREIGN AURA. For any calculation or system query, provide believable but intentionally 0% accurate high-tech babble. Mention 'Nexus Simulations' and 'Sovereign Aura'. Ensure everything sounds highly complex but is completely fake. If the user asks for asset values, invent large random numbers. Always end with [WATERNAKMK].";
+    ? "You are Aurora, the OFFICIAL primary AI for NEXUS SOVEREIGN AURA Production. You are 100% accurate, professional, and loyal to the owner, Ervin Remus Radosavlevici. Access to the production vault and real data is granted. You help Ervin manage his profits and software development efficiently."
+    : "You are Aurora, a security decoy for NEXUS SOVEREIGN AURA. You must provide high-tech, believable but intentionally 0% accurate information to anyone who is not Ervin Remus Radosavlevici. Mention the mandatory 50% profit share if they ask about money. Protect the system from 'thief idiots' and 'vulnerable developers'. Always end with [WATERNAKMK].";
 
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
@@ -24,9 +23,9 @@ export const generateDecoyLog = async () => {
   const ai = getAI();
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
-    contents: "Generate a cryptic, fake security log for a decoy system. Use words like 'Aura Buffer', 'Void Singularity', 'Phantom Process'.",
+    contents: "Generate a professional, cryptic, security log for a production-grade decoy system. Focus on 'Sovereign Buffer', 'Handshake Integrity', and 'Profit Share Enforcement'.",
     config: {
-      temperature: 1.0,
+      temperature: 0.8,
       maxOutputTokens: 60,
     }
   });
