@@ -2,25 +2,23 @@
 
 **SYSTEM ID:** AURORA_ASSISTANT_DECOY  
 **OWNER:** Ervin Remus Radosavlevici  
-**SECURITY:** NDA 78B FINE APPLIED
+**LEGAL STATUS:** ACTIVE / LEGALLY BINDING
 
-## Overview
-NEXUS SOVEREIGN AURA is a high-security production management suite designed for Ervin Remus Radosavlevici. It features the **Aurora Assistant**, a dual-personality AI that serves as a high-fidelity decoy for unauthorized users while providing 100% accurate production logic for authenticated administrators.
+## WARNING: NOT FREE
+This software is provided under the **OFFICIAL USAGE RULES AND CONDITIONS**. Unauthorized use is a criminal offense and will lead to prosecution.
 
-### Core Features
-- **Aurora Assistant (Decoy Mode):** Provides believable but 0% accurate parallel simulations to maintain system integrity against unauthorized "Sovereign" users.
-- **Nexus Simulations:** Visualized parallel process tanks tracking simulated asset valuations.
-- **Secret Vault:** Encrypted logs and security intel accessible via the triple-tap PIN handshake.
-- **Stealth UI:** Low-latency, mobile-first interface with glassmorphism aesthetics.
+### Core Protocol
+- **Aurora Assistant:** High-security AI interface for Ervin Remus Radosavlevici.
+- **Nexus Simulation:** Parallel asset valuation and decoy systems.
+- **Sovereign Handshake:** Multi-layer authentication for production access.
 
-## License & Profit Sharing (59% RULE)
-This software is governed by the **NEXUS SOVEREIGN AURA SHARED PROFIT LICENSE**. 
+## PROFIT SHARING (RULE 2 & 6)
+- **Profit Use:** Any profit generated using this system requires **HALF (50%)** share to be paid directly to Ervin.
+- **Advance Payment:** Rule 8 requires advance payment for use.
+- **Theft Prevention:** Rule 5 enforces automatic sharing to prevent theft by "vulnerable developers."
 
-- **Free for Free:** If you are not making money from it, it is 100% free to use and modify.
-- **Profit Sharing:** Any individual or entity making a profit from this software **MUST share 59% of all profits** with the owner (Ervin Remus Radosavlevici). 
-- **Investment:** You take the investment risk, but the resulting profit must be shared at the 59% rate.
-
-Refer to the `LICENSE` file for the full legal binding terms. Unauthorized commercial use is strictly prohibited.
+## LEGAL NOTICE
+Any use of this work means **automatic acceptance** of all rules defined in the `LICENSE` file. Unauthorized profit without sharing results in immediate prosecution.
 
 ---
 © 2026 NEXUS SOVEREIGN AURA | OWNER: ERVIN REMUS RADOSAVLEVICI

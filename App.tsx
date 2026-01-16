@@ -10,6 +10,7 @@ const App: React.FC = () => {
   const [status, setStatus] = useState<SystemStatus>(SystemStatus.AURA_ACTIVE);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showHandshake, setShowHandshake] = useState(false);
+  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
   const [simulations, setSimulations] = useState<Simulation[]>([]);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [activeTab, setActiveTab] = useState<'chat' | 'sims'>('chat');
@@ -25,7 +26,7 @@ const App: React.FC = () => {
       timestamp: Date.now(),
       isDecoy: !isAdmin
     };
-    setMessages(prev => [...prev, msg].slice(-50)); // Cap messages for performance
+    setMessages(prev => [...prev, msg].slice(-50));
   }, [isAdmin]);
 
   const handleUnlock = (success: boolean) => {
@@ -33,45 +34,29 @@ const App: React.FC = () => {
       setIsAdmin(true);
       setStatus(SystemStatus.PRODUCTION);
       setShowHandshake(false);
-      addAssistantMessage("AUTHENTICATION SUCCESSFUL. PRODUCTION ACCESS GRANTED. SYSTEM AUDIT: 0 BUGS FOUND. [WATERNAKMK]");
+      addAssistantMessage("AUTHENTICATION SUCCESSFUL. PRODUCTION ACCESS GRANTED. SYSTEM AUDIT: OFFICIAL LEGAL COMPLIANCE VERIFIED. [WATERNAKMK]");
     } else {
       setShowHandshake(false);
     }
   };
 
   useEffect(() => {
-    // Initial Security Greeting
-    const timer = setTimeout(() => {
-      addAssistantMessage("NEXUS SOVEREIGN AURA ONLINE. SYSTEM STATUS: AURA_ACTIVE. AUDITING PERIMETER... [WATERNAKMK]");
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [addAssistantMessage]);
+    if (hasAcceptedTerms) {
+      const timer = setTimeout(() => {
+        addAssistantMessage("NEXUS SOVEREIGN AURA ONLINE. SYSTEM STATUS: AURA_ACTIVE. LEGAL PROTOCOLS INITIATED. [WATERNAKMK]");
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [hasAcceptedTerms, addAssistantMessage]);
 
   const triggerHandshake = () => {
     setShowHandshake(true);
   };
 
-  const startSimulation = useCallback(() => {
-    const isDecoy = !isAdmin;
-    const newSim: Simulation = {
-      id: `NX-${Math.random().toString(36).substr(2, 6).toUpperCase()}`,
-      startTime: Date.now(),
-      duration: 10,
-      status: 'RUNNING',
-      valuation: isDecoy ? `$${(Math.random() * 1000000).toLocaleString()}` : 'VERIFYING...'
-    };
-    setSimulations(prev => [...prev, newSim].slice(-20)); // Cap simulations
-    
-    setTimeout(() => {
-      setSimulations(prev => prev.map(s => s.id === newSim.id ? { ...s, status: 'COMPLETED' } : s));
-    }, 5000);
-  }, [isAdmin]);
-
   const handleSendMessage = async (text: string) => {
     const trimmed = text.trim();
     if (!trimmed) return;
 
-    // Check for secret string handshake (Audit: Backdoor logic maintained per user request)
     if (trimmed.toUpperCase() === "ERVIN_1987_PROD") {
       handleUnlock(true);
       return;
@@ -92,6 +77,33 @@ const App: React.FC = () => {
       addAssistantMessage("AURORA: SIGNAL INTERRUPTED. SYSTEM INTEGRITY MAINTAINED.");
     }
   };
+
+  if (!hasAcceptedTerms) {
+    return (
+      <div className="fixed inset-0 z-[200] bg-slate-950 flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-full max-w-md glass border border-rose-500/30 p-8 rounded-3xl space-y-6 animate-in zoom-in-95 duration-300">
+          <div className="space-y-2">
+            <h1 className="text-rose-500 font-bold tracking-tighter text-xl mono">OFFICIAL USAGE RULES</h1>
+            <p className="text-[10px] text-slate-400 mono uppercase tracking-widest">© Ervin Remus Radosavlevici</p>
+          </div>
+          <div className="max-h-60 overflow-y-auto text-[11px] text-slate-300 mono text-left p-4 bg-slate-900/50 rounded-xl space-y-3 border border-slate-800">
+            <p><span className="text-rose-400 font-bold">RULE 1: NOT FREE.</span> MIT with share half. I do not give this for free.</p>
+            <p><span className="text-rose-400 font-bold">RULE 2: PROFIT USE.</span> If you make money, I want half (50%).</p>
+            <p><span className="text-rose-400 font-bold">RULE 6: PROSECUTION.</span> If used without asking, you will be prosecuted.</p>
+            <p><span className="text-rose-400 font-bold">RULE 8: ADVANCE PAYMENT.</span> Required for use.</p>
+            <p className="pt-2 text-rose-500/80 italic font-bold">LEGAL NOTICE: Any use means automatic acceptance of all rules.</p>
+          </div>
+          <button 
+            onClick={() => setHasAcceptedTerms(true)}
+            className="w-full py-4 bg-rose-500 text-white rounded-2xl font-bold mono text-xs uppercase tracking-widest hover:bg-rose-600 transition-all active:scale-95 shadow-lg shadow-rose-500/20"
+          >
+            I Accept / Automatic Acceptance
+          </button>
+          <p className="text-[8px] text-slate-600 mono uppercase">If you do not agree, do not use it.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-screen bg-slate-950 text-slate-100 selection:bg-purple-500/30 overflow-hidden">
@@ -116,7 +128,6 @@ const App: React.FC = () => {
       />
 
       <main className="flex-1 flex flex-col relative overflow-hidden">
-        {/* Navigation Tabs */}
         <nav className="flex glass border-b border-slate-800/50" role="tablist">
           <button 
             role="tab"
@@ -144,7 +155,20 @@ const App: React.FC = () => {
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] mono text-slate-500 uppercase">Parallel Processes</h3>
                 <button 
-                  onClick={startSimulation}
+                  onClick={() => {
+                    const isDecoy = !isAdmin;
+                    const newSim: Simulation = {
+                      id: `NX-${Math.random().toString(36).substr(2, 6).toUpperCase()}`,
+                      startTime: Date.now(),
+                      duration: 10,
+                      status: 'RUNNING',
+                      valuation: isDecoy ? `$${(Math.random() * 1000000).toLocaleString()}` : 'VERIFYING...'
+                    };
+                    setSimulations(prev => [...prev, newSim].slice(-20));
+                    setTimeout(() => {
+                      setSimulations(prev => prev.map(s => s.id === newSim.id ? { ...s, status: 'COMPLETED' } : s));
+                    }, 5000);
+                  }}
                   className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] mono rounded-full hover:bg-cyan-500/20 transition-all active:scale-95"
                 >
                   + LAUNCH_TANK
@@ -156,13 +180,12 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      {/* Persistent Legal Info */}
       <footer className="p-2 border-t border-slate-900 bg-slate-950/50 flex flex-col items-center text-center space-y-1">
         <p className="text-[7px] text-slate-600 mono leading-none uppercase">
           OWNER: ERVIN REMUS RADOSAVLEVICI | DOB: 01/09/1987 | SECURITY: NDA 78B FINE
         </p>
-        <p className="text-[7px] text-slate-700 mono leading-none uppercase">
-          © 2026 NEXUS SOVEREIGN AURA | SYSTEM: AURORA_ASSISTANT_DECOY
+        <p className="text-[7px] text-slate-700 mono leading-none uppercase font-bold text-rose-500/80">
+          PROFIT SHARE: 50% MANDATORY | ADVANCE PAYMENT REQUIRED
         </p>
       </footer>
 
