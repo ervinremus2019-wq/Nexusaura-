@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Simulation } from '../types';
 
@@ -8,20 +7,20 @@ interface Props {
 
 const SimulationTanks: React.FC<Props> = ({ simulations }) => {
   return (
-    <div className="grid grid-cols-1 gap-4">
+    <div className="grid grid-cols-1 gap-4 pb-20">
       {simulations.length === 0 && (
         <div className="h-32 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-2xl text-slate-600">
           <p className="text-[10px] mono uppercase tracking-[0.2em]">Void Process Empty</p>
         </div>
       )}
-      {simulations.map(sim => (
+      {[...simulations].reverse().map(sim => (
         <div 
           key={sim.id} 
           className="glass border border-slate-800 p-4 rounded-2xl space-y-3 relative overflow-hidden animate-in slide-in-from-bottom-2 duration-300"
         >
           {sim.status === 'RUNNING' && (
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-cyan-900">
-               <div className="h-full bg-cyan-400 animate-[progress_5s_linear]" style={{ width: '100%' }}></div>
+               <div className="h-full bg-cyan-400 animate-progress"></div>
             </div>
           )}
           
@@ -35,7 +34,7 @@ const SimulationTanks: React.FC<Props> = ({ simulations }) => {
             </div>
             <div className="text-right">
               <p className="text-[8px] mono text-slate-500 uppercase leading-none mb-1">Calculated Valuation</p>
-              <p className={`text-xs mono font-bold ${sim.status === 'RUNNING' ? 'text-slate-500' : 'text-cyan-400'}`}>
+              <p className={`text-xs mono font-bold ${sim.status === 'RUNNING' ? 'text-slate-500 italic' : 'text-cyan-400'}`}>
                 {sim.valuation || '---'}
               </p>
             </div>
