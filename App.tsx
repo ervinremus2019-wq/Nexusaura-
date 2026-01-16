@@ -1,10 +1,14 @@
+
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { SystemStatus, Simulation, VaultEntry, ChatMessage } from './types';
+import { SystemStatus, Simulation, ChatMessage, WorkflowTask, ProjectFile } from './types';
 import { getAuroraResponse } from './services/geminiService';
 import SecurityHeader from './components/SecurityHeader';
 import HandshakeOverlay from './components/HandshakeOverlay';
 import SimulationTanks from './components/SimulationTanks';
 import AuroraChat from './components/AuroraChat';
+import ProjectLab from './components/ProjectLab';
+import WorkflowManager from './components/WorkflowManager';
+import ApiTerminal from './components/ApiTerminal';
 
 const App: React.FC = () => {
   const [status, setStatus] = useState<SystemStatus>(SystemStatus.AURA_ACTIVE);
@@ -13,7 +17,7 @@ const App: React.FC = () => {
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
   const [simulations, setSimulations] = useState<Simulation[]>([]);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [activeTab, setActiveTab] = useState<'chat' | 'sims'>('chat');
+  const [activeTab, setActiveTab] = useState<'chat' | 'sims' | 'lab' | 'workflow' | 'api'>('chat');
   
   const tapCount = useRef(0);
   const lastTapTime = useRef(0);
@@ -43,7 +47,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (hasAcceptedTerms) {
       const timer = setTimeout(() => {
-        addAssistantMessage("NEXUS SOVEREIGN AURA ONLINE. SYSTEM STATUS: AURA_ACTIVE. LEGAL PROTOCOLS INITIATED. [WATERNAKMK]");
+        addAssistantMessage("NEXUS SOVEREIGN AURA ONLINE. ALL WORKFLOWS SYNCHRONIZED. SYSTEM ID: AURORA_78B. [WATERNAKMK]");
       }, 1000);
       return () => clearTimeout(timer);
     }
@@ -90,18 +94,19 @@ const App: React.FC = () => {
             <p><span className="text-rose-400 font-bold">Rule 1 — Not Free:</span> MIT with share half. You think I give this to you for free? This is NOT free.</p>
             <p><span className="text-rose-400 font-bold">Rule 2 — Profit Use:</span> If you make money, I want Half.</p>
             <p><span className="text-rose-400 font-bold">Rule 3 — Developers:</span> Thieves play and get 20 years prison.</p>
-            <p><span className="text-rose-400 font-bold">Rule 5 — Mandatory Profit Sharing:</span> Automatic sharing to save you from 20 years prison. If you use me, you must share profit here. Ask Ervin Radosavlevici for use if not prosecuted will you be.</p>
+            <p><span className="text-rose-400 font-bold">Rule 5 — Mandatory Profit Sharing:</span> Automatic sharing to save you from 20 years prison. Ask Ervin Radosavlevici for use if not prosecuted will you be.</p>
             <p><span className="text-rose-400 font-bold">Rule 6 — Share Ratio:</span> Half / half / half. If without asking, you will be prosecuted.</p>
             <p><span className="text-rose-400 font-bold">Rule 8 — Payment:</span> Advance payment is required to use it.</p>
+            <p><span className="text-rose-400 font-bold">Rule 10:</span> You are suck, mister dickly.</p>
             <p className="pt-2 text-rose-500/80 italic font-bold">LEGAL NOTICE: Any use means automatic acceptance of all rules. Prosecution enabled.</p>
           </div>
           <button 
             onClick={() => setHasAcceptedTerms(true)}
             className="w-full py-4 bg-rose-500 text-white rounded-2xl font-bold mono text-xs uppercase tracking-widest hover:bg-rose-600 transition-all active:scale-95 shadow-lg shadow-rose-500/20"
           >
-            I Accept / Automatic Acceptance
+            Accept Sovereign Rules
           </button>
-          <p className="text-[8px] text-slate-600 mono uppercase">If you do not agree, do not use it. Theft is prosecuted.</p>
+          <p className="text-[8px] text-slate-600 mono uppercase">Theft results in immediate prison time.</p>
         </div>
       </div>
     );
@@ -130,29 +135,35 @@ const App: React.FC = () => {
       />
 
       <main className="flex-1 flex flex-col relative overflow-hidden">
-        <nav className="flex glass border-b border-slate-800/50" role="tablist">
-          <button 
-            role="tab"
-            aria-selected={activeTab === 'chat'}
-            onClick={() => setActiveTab('chat')}
-            className={`flex-1 py-3 text-[10px] tracking-[0.2em] mono transition-all ${activeTab === 'chat' ? 'text-purple-400 bg-purple-500/5 border-b-2 border-purple-500' : 'text-slate-500'}`}
-          >
-            AURORA_ASSISTANT
-          </button>
-          <button 
-            role="tab"
-            aria-selected={activeTab === 'sims'}
-            onClick={() => setActiveTab('sims')}
-            className={`flex-1 py-3 text-[10px] tracking-[0.2em] mono transition-all ${activeTab === 'sims' ? 'text-cyan-400 bg-cyan-500/5 border-b-2 border-cyan-500' : 'text-slate-500'}`}
-          >
-            NEXUS_SIMULATIONS
-          </button>
+        <nav className="flex glass border-b border-slate-800/50 overflow-x-auto scrollbar-hide" role="tablist">
+          {[
+            { id: 'chat', label: 'AURORA_AI' },
+            { id: 'sims', label: 'NEXUS_SIMS' },
+            { id: 'lab', label: 'PROJECT_LAB' },
+            { id: 'workflow', label: 'WORKFLOW' },
+            { id: 'api', label: 'API_TERMINAL' }
+          ].map((tab) => (
+            <button 
+              key={tab.id}
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              className={`flex-1 min-w-[100px] py-4 text-[9px] tracking-[0.2em] mono transition-all border-b-2 ${
+                activeTab === tab.id 
+                  ? 'text-purple-400 bg-purple-500/5 border-purple-500' 
+                  : 'text-slate-600 border-transparent hover:text-slate-400'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </nav>
 
-        <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-hide">
-          {activeTab === 'chat' ? (
+        <div className="flex-1 overflow-y-auto p-4 scrollbar-hide">
+          {activeTab === 'chat' && (
             <AuroraChat messages={messages} onSendMessage={handleSendMessage} isAdmin={isAdmin} />
-          ) : (
+          )}
+          {activeTab === 'sims' && (
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] mono text-slate-500 uppercase">Parallel Processes</h3>
@@ -179,6 +190,9 @@ const App: React.FC = () => {
               <SimulationTanks simulations={simulations} />
             </div>
           )}
+          {activeTab === 'lab' && <ProjectLab isAdmin={isAdmin} />}
+          {activeTab === 'workflow' && <WorkflowManager />}
+          {activeTab === 'api' && <ApiTerminal isAdmin={isAdmin} />}
         </div>
       </main>
 
@@ -192,7 +206,7 @@ const App: React.FC = () => {
       </footer>
 
       {showHandshake && (
-        <HandshakeOverlay onCancel={() => setShowHandshake(false)} onComplete={handleUnlock} />
+        <HandshakeOverlay onComplete={handleUnlock} onCancel={() => setShowHandshake(false)} />
       )}
     </div>
   );

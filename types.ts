@@ -22,6 +22,19 @@ export interface Simulation {
   valuation?: string;
 }
 
+export interface ProjectFile {
+  name: string;
+  language: string;
+  content: string;
+}
+
+export interface WorkflowTask {
+  id: string;
+  title: string;
+  status: 'TODO' | 'IN_PROGRESS' | 'DONE';
+  priority: 'LOW' | 'HIGH' | 'CRITICAL';
+}
+
 export interface VaultEntry {
   id: string;
   timestamp: string;
