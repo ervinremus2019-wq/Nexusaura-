@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { SystemStatus, Simulation, ChatMessage, WorkflowTask, ProjectFile } from './types';
 import { getAuroraResponse } from './services/geminiService';
@@ -202,27 +203,29 @@ const App: React.FC = () => {
         </nav>
 
         <div className="flex-1 overflow-y-auto p-5 scrollbar-hide relative z-20">
-          {activeTab === 'chat' && <AuroraChat messages={messages} onSendMessage={handleSendMessage} isAdmin={isAdmin} />}
-          {activeTab === 'sims' && (
-            <div className="max-w-4xl mx-auto space-y-6">
-              <div className="flex justify-between items-center bg-slate-900/40 p-5 rounded-[2rem] border border-white/5 shadow-2xl backdrop-blur-md">
-                <div className="space-y-1">
-                  <h3 className="text-[11px] mono text-slate-300 uppercase tracking-widest font-black">Nexus_Market_Simulation</h3>
-                  <p className="text-[8px] mono text-purple-500 uppercase font-bold">Rule 2 Profit Splitting Enabled</p>
+          <div className="max-w-7xl mx-auto h-full">
+            {activeTab === 'chat' && <AuroraChat messages={messages} onSendMessage={handleSendMessage} isAdmin={isAdmin} />}
+            {activeTab === 'sims' && (
+              <div className="space-y-6">
+                <div className="flex justify-between items-center bg-slate-900/40 p-5 rounded-[2rem] border border-white/5 shadow-2xl backdrop-blur-md">
+                  <div className="space-y-1">
+                    <h3 className="text-[11px] mono text-slate-300 uppercase tracking-widest font-black">Nexus_Market_Simulation</h3>
+                    <p className="text-[8px] mono text-purple-500 uppercase font-bold">Rule 2 Profit Splitting Enabled</p>
+                  </div>
+                  <button 
+                    onClick={launchSimulation}
+                    className="px-6 py-3 bg-cyan-600/20 border border-cyan-500/30 text-cyan-400 text-[10px] mono rounded-2xl hover:bg-cyan-500/40 active:scale-95 transition-all shadow-xl shadow-cyan-900/20 btn-sovereign font-bold"
+                  >
+                    + Execute_New_Tank
+                  </button>
                 </div>
-                <button 
-                  onClick={launchSimulation}
-                  className="px-6 py-3 bg-cyan-600/20 border border-cyan-500/30 text-cyan-400 text-[10px] mono rounded-2xl hover:bg-cyan-500/40 active:scale-95 transition-all shadow-xl shadow-cyan-900/20 btn-sovereign font-bold"
-                >
-                  + Execute_New_Tank
-                </button>
+                <SimulationTanks simulations={simulations} />
               </div>
-              <SimulationTanks simulations={simulations} />
-            </div>
-          )}
-          {activeTab === 'lab' && <ProjectLab isAdmin={isAdmin} />}
-          {activeTab === 'workflow' && <WorkflowManager tasks={tasks} isAdmin={isAdmin} />}
-          {activeTab === 'api' && <ApiTerminal isAdmin={isAdmin} />}
+            )}
+            {activeTab === 'lab' && <ProjectLab isAdmin={isAdmin} />}
+            {activeTab === 'workflow' && <WorkflowManager tasks={tasks} isAdmin={isAdmin} />}
+            {activeTab === 'api' && <ApiTerminal isAdmin={isAdmin} />}
+          </div>
         </div>
       </main>
 
