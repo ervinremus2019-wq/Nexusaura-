@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { processTerminalCommand } from '../services/geminiService';
 
 interface Props {
   isAdmin: boolean;
@@ -10,11 +11,12 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
     "BOOT: NEXUS_API_BRIDGE_V78B_PROD",
     "HANDSHAKE: REDDIT_CORE_UPLINK_STABLE",
     "STATUS: 200 OK / THROUGHPUT_READY",
+    "ETHICS: HUMAN_RIGHTS_PROTOCOL_V4_LOADED",
     "WATCHDOG: PROFIT_MONITOR_ACTIVE",
-    "ENFORCEMENT: RULE_6_POLICIES_LOADED",
-    "SYSTEM: AWAITING_SOVEREIGN_COMMAND..."
+    "SYSTEM: AWAITING_SOVEREIGN_OR_AI_COMMAND..."
   ]);
   const [command, setCommand] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
   const logEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -25,36 +27,37 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
     scrollToBottom();
   }, [logs]);
 
-  const handleCommand = (e: React.FormEvent) => {
+  const handleCommand = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!command.trim()) return;
+    if (!command.trim() || isProcessing) return;
 
-    const cmd = command.toLowerCase().trim();
-    const newLogs = [...logs, `nexus@aurora:~$ ${command}`];
+    const rawInput = command.trim();
+    const cmdLower = rawInput.toLowerCase();
+    setCommand('');
+    setLogs(prev => [...prev, `nexus@aurora:~$ ${rawInput}`]);
 
-    if (cmd === 'help') {
-      newLogs.push("AVAILABLE: [poll_reddit, audit_profit, rule_check, cls, status]");
-    } else if (cmd === 'poll_reddit') {
-      newLogs.push("POLLING: r/investing... r/stocks...");
-      newLogs.push("SENTIMENT_ANALYSIS: BULLISH_FOR_SOVEREIGN_AURA");
-      newLogs.push("DATA_BRIDGE: REDDIT_ONLY_STABLE");
-    } else if (cmd === 'audit_profit') {
-      newLogs.push(isAdmin ? "AUDIT_RESULT: 100% COMPLIANCE. ERVIN_SHARE=50% Verified." : "AUDIT_RESULT: [REDACTED] - RULE 8 VIOLATION DETECTED.");
-    } else if (cmd === 'rule_check') {
-      newLogs.push("ACTIVE_POLICIES: RULES_1_THRU_10_VERIFIED.");
-    } else if (cmd === 'status') {
-      newLogs.push(`SYSTEM: ${isAdmin ? 'PRODUCTION' : 'DECOY_MODE'}`);
-      newLogs.push("THROUGHPUT: 782 GB/s [SVRGN]");
-    } else if (cmd === 'cls') {
+    // Manual quick commands
+    if (cmdLower === 'cls') {
       setLogs(["BOOT: NEXUS_API_BRIDGE_RESTARTED"]);
-      setCommand('');
       return;
-    } else {
-      newLogs.push(`ERR: COMMAND_NOT_FOUND: ${cmd}`);
     }
 
-    setLogs(newLogs.slice(-20));
-    setCommand('');
+    setIsProcessing(true);
+    
+    // AI Agent Processing
+    const aiResponse = await processTerminalCommand(rawInput, isAdmin);
+    
+    setIsProcessing(false);
+    
+    const newLogs = [...aiResponse.logs];
+    if (aiResponse.output) newLogs.push(`>> ${aiResponse.output}`);
+    
+    // Append a standard rule footer for specific commands
+    if (aiResponse.commandUsed === 'audit_profit' || aiResponse.commandUsed === 'rule_check') {
+      newLogs.push("NOTICE: Rule 2 and 6 are being strictly monitored.");
+    }
+
+    setLogs(prev => [...prev, ...newLogs].slice(-50));
   };
 
   return (
@@ -62,15 +65,17 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
       <div className="flex justify-between items-center px-1">
         <div className="space-y-0.5">
           <h3 className="text-[10px] mono text-slate-500 uppercase tracking-widest font-black">Production API Terminal</h3>
-          <p className="text-[8px] mono text-slate-700 uppercase">Reddit Core Bridge / Sovereignty Console</p>
+          <p className="text-[8px] mono text-slate-700 uppercase">AI-Powered Natural Language Interface</p>
         </div>
         <div className="flex items-center space-x-2">
-           <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></div>
-           <span className="text-[8px] mono text-emerald-500 font-black uppercase">Reddit_Sync_Active</span>
+           <div className={`w-1.5 h-1.5 rounded-full ${isProcessing ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500'} animate-ping`}></div>
+           <span className="text-[8px] mono text-emerald-500 font-black uppercase">
+             {isProcessing ? 'AI_PROCESSING...' : 'AI_AGENT_IDLE'}
+           </span>
         </div>
       </div>
 
-      <div className="glass bg-[#010409]/90 border border-slate-800 rounded-3xl p-6 font-mono text-[11px] min-h-[350px] flex flex-col shadow-2xl relative overflow-hidden">
+      <div className="glass bg-[#010409]/90 border border-slate-800 rounded-3xl p-6 font-mono text-[11px] min-h-[400px] flex flex-col shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-cyan-500 to-rose-500 opacity-30"></div>
         
         <div className="flex-1 space-y-1.5 overflow-y-auto pr-2 scrollbar-hide no-scrollbar">
@@ -78,14 +83,21 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
             <div key={i} className="flex space-x-3 group">
               <span className="text-slate-700 select-none">[{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}]</span>
               <span className={`break-all ${
-                log.includes('ERR') ? 'text-rose-500' : 
+                log.includes('ERR') || log.includes('ALERT') ? 'text-rose-500' : 
                 log.includes('nexus@aurora') ? 'text-cyan-400 font-bold' : 
+                log.startsWith('>>') ? 'text-purple-400 font-medium' :
                 'text-emerald-500/90'
               }`}>
                 {log}
               </span>
             </div>
           ))}
+          {isProcessing && (
+            <div className="flex space-x-3 animate-pulse">
+              <span className="text-slate-700">[{new Date().toLocaleTimeString()}]</span>
+              <span className="text-amber-500 font-bold italic">AI_AGENT: TRANSLATING_NATURAL_LANGUAGE...</span>
+            </div>
+          )}
           <div ref={logEndRef} />
         </div>
 
@@ -94,34 +106,34 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
           <input 
             type="text" 
             autoFocus
+            disabled={isProcessing}
             value={command}
             onChange={(e) => setCommand(e.target.value)}
-            placeholder="Type 'help' for commands..."
-            className="bg-transparent border-none outline-none text-slate-100 w-full placeholder:text-slate-800 mono text-xs"
+            placeholder="Talk to AI Agent or type command..."
+            className="bg-transparent border-none outline-none text-slate-100 w-full placeholder:text-slate-800 mono text-xs disabled:opacity-50"
           />
         </form>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="glass border border-slate-800 p-5 rounded-3xl text-center bg-slate-900/10 shadow-lg">
-          <p className="text-[8px] mono text-slate-600 uppercase mb-2 tracking-[0.2em]">Reddit Throughput</p>
-          <p className="text-xl mono text-cyan-400 font-black">782 GB/s</p>
-          <div className="w-full h-1 bg-slate-800 rounded-full mt-3 overflow-hidden">
-            <div className="w-4/5 h-full bg-cyan-500 animate-pulse"></div>
-          </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div className="glass border border-slate-800 p-4 rounded-2xl text-center bg-slate-900/10">
+          <p className="text-[7px] mono text-slate-600 uppercase mb-1 tracking-widest">Throughput</p>
+          <p className="text-sm mono text-cyan-400 font-black tracking-tighter">782 GB/s</p>
         </div>
-        <div className="glass border border-slate-800 p-5 rounded-3xl text-center bg-slate-900/10 shadow-lg">
-          <p className="text-[8px] mono text-slate-600 uppercase mb-2 tracking-[0.2em]">Security Rating</p>
-          <p className="text-xl mono text-purple-400 font-black">100% SVRGN</p>
-          <div className="w-full h-1 bg-slate-800 rounded-full mt-3 overflow-hidden">
-            <div className="w-full h-full bg-purple-500"></div>
-          </div>
+        <div className="glass border border-slate-800 p-4 rounded-2xl text-center bg-slate-900/10">
+          <p className="text-[7px] mono text-slate-600 uppercase mb-1 tracking-widest">AI Status</p>
+          <p className="text-sm mono text-purple-400 font-black tracking-tighter">NOMINAL</p>
+        </div>
+        <div className="glass border border-slate-800 p-4 rounded-2xl text-center bg-slate-900/10">
+          <p className="text-[7px] mono text-slate-600 uppercase mb-1 tracking-widest">Ethic Lock</p>
+          <p className="text-sm mono text-emerald-400 font-black tracking-tighter">V4_HRL</p>
         </div>
       </div>
       
       <div className="p-3 bg-rose-500/5 border border-rose-500/10 rounded-2xl">
-        <p className="text-[8px] mono text-rose-500/80 text-center uppercase font-black">
-          CRITICAL: Unauthorized command execution triggers Rule 3 (20 years prison).
+        <p className="text-[8px] mono text-slate-500 text-center uppercase font-black tracking-widest">
+          Sovereign AI Ethics Protocol: Operative within International Human Rights Law. 
+          <span className="text-rose-500 ml-2 italic">Rule 3 Still Enforced.</span>
         </p>
       </div>
     </div>
