@@ -1,20 +1,26 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# NEXUS SOVEREIGN AURA
 
-# Run and deploy your AI Studio app
+**SYSTEM ID:** AURORA_ASSISTANT_DECOY  
+**OWNER:** Ervin Remus Radosavlevici  
+**SECURITY:** NDA 78B FINE APPLIED
 
-This contains everything you need to run your app locally.
+## Overview
+NEXUS SOVEREIGN AURA is a high-security production management suite designed for Ervin Remus Radosavlevici. It features the **Aurora Assistant**, a dual-personality AI that serves as a high-fidelity decoy for unauthorized users while providing 100% accurate production logic for authenticated administrators.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1DRhX1KuFKPrikG34Do0qcOsdx3trW4T5
+### Core Features
+- **Aurora Assistant (Decoy Mode):** Provides believable but 0% accurate parallel simulations to maintain system integrity against unauthorized "Sovereign" users.
+- **Nexus Simulations:** Visualized parallel process tanks tracking simulated asset valuations.
+- **Secret Vault:** Encrypted logs and security intel accessible via the triple-tap PIN handshake.
+- **Stealth UI:** Low-latency, mobile-first interface with glassmorphism aesthetics.
 
-## Run Locally
+## License & Profit Sharing (59% RULE)
+This software is governed by the **NEXUS SOVEREIGN AURA SHARED PROFIT LICENSE**. 
 
-**Prerequisites:**  Node.js
+- **Free for Free:** If you are not making money from it, it is 100% free to use and modify.
+- **Profit Sharing:** Any individual or entity making a profit from this software **MUST share 59% of all profits** with the owner (Ervin Remus Radosavlevici). 
+- **Investment:** You take the investment risk, but the resulting profit must be shared at the 59% rate.
 
+Refer to the `LICENSE` file for the full legal binding terms. Unauthorized commercial use is strictly prohibited.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+© 2026 NEXUS SOVEREIGN AURA | OWNER: ERVIN REMUS RADOSAVLEVICI
