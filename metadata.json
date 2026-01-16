@@ -1,0 +1,7 @@
+{
+  "name": "NEXUS SOVEREIGN AURA",
+  "description": "AURORA_ASSISTANT_DECOY suite. High-security production dashboard featuring parallel decoy simulations and authenticated admin production logic for Ervin Remus Radosavlevici.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
