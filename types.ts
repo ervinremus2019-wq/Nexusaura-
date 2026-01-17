@@ -21,7 +21,7 @@ export interface ProductionStream {
   valuation?: string;
   load: number;
   threatLevel: 'LOW' | 'MED' | 'HIGH';
-  auditor: string; // "Adi Radosavlevici"
+  auditor: string; // "AGI Radosavlevici"
 }
 
 export interface ProjectFile {

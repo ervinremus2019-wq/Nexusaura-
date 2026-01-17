@@ -21,7 +21,7 @@ const SimulationTanks: React.FC<Props> = ({ simulations }) => {
       {simulations.length === 0 ? (
         <div className="h-64 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-[2rem] text-slate-600 bg-slate-950/20">
           <p className="text-[12px] mono uppercase tracking-[0.4em] font-black opacity-30">Production_Streams_Idle</p>
-          <p className="text-[8px] mono mt-2">Awaiting Adi Radosavlevici's initialization signal...</p>
+          <p className="text-[8px] mono mt-2">Awaiting AGI Radosavlevici's initialization signal...</p>
         </div>
       ) : (
         <div className="flex-1 overflow-x-auto scrollbar-hide">

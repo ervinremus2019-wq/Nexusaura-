@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const [productionStreams, setProductionStreams] = useState<ProductionStream[]>([]);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [tasks, setTasks] = useState<WorkflowTask[]>([
-    { id: 'WF-1', title: 'Adi Audit Integration', description: 'Enable Adi Radosavlevici financial audit node.', status: 'DONE', priority: 'CRITICAL', assignee: 'AURORA_78B' },
+    { id: 'WF-1', title: 'AGI Audit Integration', description: 'Enable AGI Radosavlevici financial audit node.', status: 'DONE', priority: 'CRITICAL', assignee: 'AURORA_78B' },
     { id: 'WF-2', title: 'Reddit API Polling Logic', description: 'Real-time production data stream.', status: 'IN_PROGRESS', priority: 'HIGH', assignee: 'ERVIN_RADOSAVLEVICI' },
     { id: 'WF-3', title: 'Thief Developer Jail Protocol', description: 'Rule 3 enforcement logging.', status: 'TODO', priority: 'CRITICAL', assignee: 'AURORA_78B' },
   ]);
@@ -44,7 +44,7 @@ const App: React.FC = () => {
       setIsAdmin(true);
       setStatus(SystemStatus.PRODUCTION);
       setShowHandshake(false);
-      addAssistantMessage("AUTHENTICATION SUCCESSFUL. PRODUCTION ACCESS GRANTED. FINANCIAL AUDITOR: ADI RADOSAVLEVICI ONLINE. [WATERNAKMK]");
+      addAssistantMessage("AUTHENTICATION SUCCESSFUL. PRODUCTION ACCESS GRANTED. FINANCIAL AUDITOR: AGI RADOSAVLEVICI ONLINE. [WATERNAKMK]");
     } else {
       setShowHandshake(false);
       addAssistantMessage("SECURITY ALERT: AUTHENTICATION FAILURE. [WATERNAKMK]");
@@ -54,7 +54,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (hasAcceptedTerms) {
       const timer = setTimeout(() => {
-        addAssistantMessage("NEXUS SOVEREIGN AURA ONLINE. ERVIN & ADI RADOSAVLEVICI AUTHORIZED. [WATERNAKMK]");
+        addAssistantMessage("NEXUS SOVEREIGN AURA ONLINE. ERVIN & AGI RADOSAVLEVICI AUTHORIZED. [WATERNAKMK]");
       }, 1000);
       return () => clearTimeout(timer);
     }
@@ -96,8 +96,8 @@ const App: React.FC = () => {
       status: 'ACTIVE',
       load: Math.floor(Math.random() * 20) + 80,
       threatLevel: Math.random() > 0.9 ? 'HIGH' : 'LOW',
-      valuation: isDecoy ? `$${(Math.random() * 5000).toLocaleString()}` : 'CALCULATING_ADI_AUDIT...',
-      auditor: "Adi Radosavlevici"
+      valuation: isDecoy ? `$${(Math.random() * 5000).toLocaleString()}` : 'CALCULATING_AGI_AUDIT...',
+      auditor: "AGI Radosavlevici"
     };
     setProductionStreams(prev => [...prev, newStream].slice(-10));
     
@@ -110,7 +110,7 @@ const App: React.FC = () => {
             ...s,
             status: 'SETTLED',
             valuation: isAdmin 
-              ? `VAL: $${rawValue.toLocaleString()} | AUDIT BY ADI: $${ervinShare.toLocaleString()} (50%)`
+              ? `VAL: $${rawValue.toLocaleString()} | AUDIT BY AGI: $${ervinShare.toLocaleString()} (50%)`
               : `$${(rawValue / 100).toLocaleString()} (DECOY)`
           };
         }
@@ -126,16 +126,16 @@ const App: React.FC = () => {
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-rose-500 to-transparent"></div>
           <div className="space-y-3">
             <h1 className="text-rose-500 font-black tracking-tighter text-3xl mono uppercase">Sovereign_Handshake</h1>
-            <p className="text-[10px] text-slate-500 mono uppercase tracking-[0.4em] font-bold">Owners: Ervin & Adi Radosavlevici</p>
+            <p className="text-[10px] text-slate-500 mono uppercase tracking-[0.4em] font-bold">Owners: Ervin & AGI Radosavlevici</p>
           </div>
           <div className="max-h-72 overflow-y-auto text-[11px] text-slate-300 mono text-left p-6 bg-slate-950/80 rounded-2xl space-y-5 border border-slate-800/50 scrollbar-hide shadow-inner">
             <div className="pb-2 border-b border-slate-800">
                <p className="text-rose-500 font-black text-xs uppercase mb-2">Notice: Verbatim Legal Execution</p>
-               <p className="italic text-slate-500">Owners: Ervin Remus Radosavlevici & Adi Radosavlevici</p>
+               <p className="italic text-slate-500">Owners: Ervin Remus Radosavlevici & AGI Radosavlevici</p>
             </div>
-            <p><span className="text-rose-400 font-black">Rule 2 — Profit Use:</span> If you make money, I want Half. 50% Share is mandatory. Adi Radosavlevici Audits all calculations.</p>
+            <p><span className="text-rose-400 font-black">Rule 2 — Profit Use:</span> If you make money, I want Half. 50% Share is mandatory. AGI Radosavlevici Audits all calculations.</p>
             <p><span className="text-rose-400 font-black">Rule 3 — Developers:</span> Thieves play and get 20 years prison.</p>
-            <p className="text-[9px] text-slate-600 uppercase pt-2 border-t border-slate-900 mt-4 leading-relaxed">Acceptance enters a legally binding sovereign agreement with Ervin & Adi.</p>
+            <p className="text-[9px] text-slate-600 uppercase pt-2 border-t border-slate-900 mt-4 leading-relaxed">Acceptance enters a legally binding sovereign agreement with Ervin & AGI.</p>
           </div>
           <button 
             onClick={() => setHasAcceptedTerms(true)}
@@ -206,7 +206,7 @@ const App: React.FC = () => {
                 </h2>
               </div>
               <div className="text-[9px] mono text-slate-700 font-bold uppercase tracking-widest">
-                Owners: Ervin & Adi Radosavlevici
+                Owners: Ervin & AGI Radosavlevici
               </div>
             </div>
 
@@ -219,7 +219,7 @@ const App: React.FC = () => {
                     <div className="flex justify-between items-center bg-slate-900/40 p-5 rounded-3xl border border-white/5">
                       <div className="space-y-1">
                         <h3 className="text-xs mono text-slate-100 uppercase font-black tracking-widest">REAL_PRODUCTION_STREAMS</h3>
-                        <p className="text-[8px] mono text-purple-500 uppercase">AUDITED BY ADI RADOSAVLEVICI | RULE 2 ENFORCED</p>
+                        <p className="text-[8px] mono text-purple-500 uppercase">AUDITED BY AGI RADOSAVLEVICI | RULE 2 ENFORCED</p>
                       </div>
                       <button onClick={launchProductionStream} className="px-5 py-2.5 bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 text-[9px] mono rounded-xl font-black btn-sovereign">
                         + START_REAL_STREAM
@@ -241,7 +241,7 @@ const App: React.FC = () => {
 
       <footer className="h-10 border-t border-white/5 bg-black/40 backdrop-blur-3xl flex items-center justify-center z-50 shrink-0">
         <p className="text-[8px] text-rose-500/60 mono leading-none uppercase font-black tracking-[0.5em]">
-          ERVIN & ADI RADOSAVLEVICI | 50% PROFIT SHARE | RULE 3 PRISON ENFORCEMENT
+          ERVIN & AGI RADOSAVLEVICI | 50% PROFIT SHARE | RULE 3 PRISON ENFORCEMENT
         </p>
       </footer>
 
