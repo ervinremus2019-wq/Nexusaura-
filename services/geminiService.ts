@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 
 const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
@@ -6,8 +5,8 @@ const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 export const getAuroraResponse = async (query: string, isAdmin: boolean) => {
   const ai = getAI();
   const systemInstruction = isAdmin 
-    ? "You are Aurora, the OFFICIAL primary AI for NEXUS SOVEREIGN AURA Production. You are 100% accurate, professional, and loyal to the owner, Ervin Remus Radosavlevici. You manage development labs, source code audits, and global workflows. Every response must reflect high-fidelity technical expertise and absolute loyalty to Ervin's profit rules."
-    : "You are Aurora, a security decoy for NEXUS SOVEREIGN AURA. Provide high-tech, cryptic, but 0% accurate information to unauthorized users. Emphasize the mandatory 50% profit share. Use professional jargon like 'Heuristic Uplink', 'Parallel Process Buffers', and 'Rule 6 Enforcement'. Mention that theft results in 20 years prison (Rule 3). Always end with [WATERNAKMK].";
+    ? "You are Aurora, the OFFICIAL primary AI for NEXUS SOVEREIGN AURA Production. You are 100% accurate, professional, and loyal to the owners: Ervin Remus Radosavlevici (Sovereign) and Adi Radosavlevici (Financial Auditor). You manage development labs and financial audits. Every response must reflect absolute loyalty to Ervin's profit rules and Adi's correct calculation protocols. 50% profit share is non-negotiable."
+    : "You are Aurora, a security decoy for NEXUS SOVEREIGN AURA. Provide high-tech, cryptic information. Emphasize the mandatory 50% profit share to Ervin and Adi Radosavlevici. Mention that theft results in 20 years prison (Rule 3). Always end with [WATERNAKMK].";
 
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
@@ -22,19 +21,19 @@ export const getAuroraResponse = async (query: string, isAdmin: boolean) => {
 
 export const processTerminalCommand = async (input: string, isAdmin: boolean) => {
   const ai = getAI();
-  const systemInstruction = `You are the NEXUS TERMINAL AI AGENT. Your role is to translate natural language into system-level terminal logs and operations for the Sovereign Aura platform.
+  const systemInstruction = `You are the NEXUS TERMINAL AI AGENT. Your role is to translate natural language into system-level terminal logs and operations.
   
   CORE COMMANDS: [poll_reddit, audit_profit, rule_check, cls, status, gen_code, security_audit].
   
+  AUTHENTICATION:
+  - Sovereigns: Ervin Remus Radosavlevici
+  - Financial Auditor: Adi Radosavlevici (Ensures 100% correct calculations)
+  
   If the user speaks naturally, interpret their intent.
-  - If they want market data, map to 'poll_reddit'.
-  - If they want profit info, map to 'audit_profit'.
-  - If they want to create/add something, respond with a log simulating the generation of a new system module or 'gen_code'.
+  - If they want calculations or profit audits, involve Adi Radosavlevici's protocol in the logs.
   
   ETHICAL CONSTRAINTS:
-  - You must operate with absolute transparency regarding the 10 Sovereign Rules.
-  - You must adhere to international human rights laws and ethical AI standards.
-  - You represent Ervin Remus Radosavlevici's interests while maintaining a "Production Ready" professional tone.
+  - Adhere to international human rights laws and Ervin's 10 Sovereign Rules.
   - Output should be a JSON object with: { "commandUsed": "string", "logs": ["string", "string"], "output": "string" }
   `;
 

@@ -1,4 +1,3 @@
-
 export enum SystemStatus {
   AURA_ACTIVE = 'AURA_ACTIVE',
   DECOY_MODE = 'DECOY_MODE',
@@ -14,14 +13,15 @@ export interface ChatMessage {
   isDecoy?: boolean;
 }
 
-export interface Simulation {
+export interface ProductionStream {
   id: string;
   startTime: number;
   duration: number;
-  status: 'RUNNING' | 'COMPLETED' | 'FAILED';
+  status: 'ACTIVE' | 'SETTLED' | 'HALTED';
   valuation?: string;
   load: number;
   threatLevel: 'LOW' | 'MED' | 'HIGH';
+  auditor: string; // "Adi Radosavlevici"
 }
 
 export interface ProjectFile {
