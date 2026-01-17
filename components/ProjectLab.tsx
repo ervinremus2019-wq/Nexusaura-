@@ -59,7 +59,6 @@ const ProjectLab: React.FC<Props> = ({ isAdmin }) => {
   };
 
   const handleDownloadAll = () => {
-    // Simulated as individual downloads for this environment
     files.forEach((file, idx) => {
       setTimeout(() => {
         const blob = new Blob([file.content], { type: 'text/plain' });
@@ -74,69 +73,71 @@ const ProjectLab: React.FC<Props> = ({ isAdmin }) => {
   };
 
   return (
-    <div className="h-full flex flex-col space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
-      <div className="flex justify-between items-center px-1">
-        <div className="space-y-0.5">
-          <h3 className="text-[10px] mono text-slate-500 uppercase tracking-widest font-black">Nexus / production_v78b</h3>
-          <p className="text-[8px] mono text-slate-700 uppercase">Developed Assets Repository</p>
+    <div className="h-full flex flex-col space-y-6 animate-in slide-in-from-right-10 duration-500">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900/40 p-6 rounded-[2rem] border border-white/5 backdrop-blur-md">
+        <div className="space-y-1">
+          <h3 className="text-sm mono text-slate-100 uppercase tracking-widest font-black">Production_Code_Vault</h3>
+          <p className="text-[9px] mono text-slate-500 uppercase">Version 78B Repository / Ervin Sovereign Suite</p>
         </div>
-        <div className="flex space-x-2">
-          <button 
-            onClick={handleDownloadAll}
-            className="px-3 py-1.5 bg-purple-600/20 border border-purple-500/40 text-purple-400 text-[9px] mono rounded-lg hover:bg-purple-500/40 active:scale-95 transition-all shadow-lg shadow-purple-900/10"
-          >
-            DOWNLOAD_FULL_SUITE
-          </button>
-        </div>
+        <button 
+          onClick={handleDownloadAll}
+          className="w-full sm:w-auto px-6 py-3 bg-purple-600/20 border border-purple-500/40 text-purple-400 text-[10px] mono rounded-2xl hover:bg-purple-500/40 active:scale-95 transition-all shadow-xl font-black btn-sovereign"
+        >
+          EXPORT_FULL_PRODUCTION_REPOSITORY
+        </button>
       </div>
 
-      <div className="flex-1 glass border border-slate-800 rounded-3xl flex flex-col overflow-hidden shadow-2xl">
-        <div className="flex border-b border-slate-800 bg-slate-900/40 overflow-x-auto no-scrollbar">
+      <div className="flex-1 glass border border-slate-800 rounded-[2.5rem] flex flex-col overflow-hidden shadow-2xl">
+        <div className="flex bg-slate-950/60 border-b border-white/5 overflow-x-auto scrollbar-hide no-scrollbar">
           {files.map((file, idx) => (
             <button 
               key={file.id}
               onClick={() => setSelectedFileIdx(idx)}
-              className={`px-6 py-3 text-[10px] mono border-r border-slate-800 transition-all min-w-max flex items-center space-x-2 ${
-                selectedFileIdx === idx ? 'bg-slate-800/80 text-purple-400 border-b-2 border-b-purple-500' : 'text-slate-600 hover:bg-slate-800/50'
+              className={`px-8 py-5 text-[10px] mono transition-all border-r border-white/5 shrink-0 flex items-center space-x-3 ${
+                selectedFileIdx === idx ? 'bg-purple-500/10 text-purple-400 border-b-2 border-b-purple-500' : 'text-slate-600 hover:bg-white/5'
               }`}
             >
-              <span className="opacity-40">{idx + 1}.</span>
-              <span>{file.name}</span>
+              <span className="opacity-20 text-[8px]">{idx + 1}.</span>
+              <span className="font-bold tracking-widest">{file.name}</span>
             </button>
           ))}
         </div>
         
-        <div className="flex-1 p-6 overflow-auto scrollbar-hide bg-[#020617]/50 relative">
-           <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none">
-             <p className="text-[10px] mono text-slate-800 select-none">SHA-256: {Math.random().toString(16).substr(2, 20)}</p>
+        <div className="flex-1 p-8 overflow-auto scrollbar-hide bg-[#020617]/40 relative">
+           <div className="absolute top-4 right-8 p-3 opacity-20 pointer-events-none text-right">
+             <p className="text-[10px] mono text-slate-500 uppercase font-black tracking-widest">Sovereign_Hash</p>
+             <p className="text-[8px] mono text-slate-700">SHA-256: {Math.random().toString(16).substr(2, 24).toUpperCase()}</p>
            </div>
-           <pre className="text-[12px] mono text-slate-400 leading-relaxed font-medium">
+           <pre className="text-[13px] mono text-slate-400 leading-relaxed font-medium">
              <code className="block">
-               <span className="text-slate-700 select-none">// {files[selectedFileIdx].name} - Modified: {files[selectedFileIdx].lastModified}</span>
+               <span className="text-slate-700 select-none">// FILE: {files[selectedFileIdx].name} | LAST_AUTH_CHANGE: {files[selectedFileIdx].lastModified}</span>
+               {"\n"}
+               <span className="text-slate-700 select-none">// SECURITY_PROTOCOL: RULE_MANDATORY_SHARE_50</span>
                {"\n\n"}
                {files[selectedFileIdx].content}
              </code>
            </pre>
         </div>
 
-        <div className="p-4 border-t border-slate-800 flex justify-between items-center bg-slate-900/20">
-          <p className="text-[9px] mono text-slate-600 uppercase">Ready for production export</p>
+        <div className="p-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center bg-slate-950/40 gap-4">
+          <p className="text-[9px] mono text-slate-600 uppercase tracking-widest">System Ready for Production Deployment</p>
           <button 
             onClick={handleDownloadFile}
-            className="text-[9px] mono text-purple-400 hover:underline flex items-center space-x-1"
+            className="flex items-center space-x-3 text-[10px] mono text-purple-400 hover:text-purple-300 transition-colors bg-purple-500/5 px-6 py-2 rounded-xl border border-purple-500/10 font-bold"
           >
-            <span>Export this file</span>
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <span>EXTRACT_{files[selectedFileIdx].name}</span>
           </button>
         </div>
       </div>
 
-      <div className="p-4 glass border border-rose-500/20 rounded-2xl bg-rose-500/5 flex items-start space-x-3">
-        <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1 animate-pulse" />
+      <div className="p-6 glass border border-rose-500/20 rounded-[2rem] bg-rose-500/5 flex items-start space-x-5">
+        <div className="w-2 h-2 rounded-full bg-rose-500 mt-2 animate-pulse shadow-[0_0_15px_rgba(244,63,94,0.8)]" />
         <div className="space-y-1">
-          <p className="text-[10px] mono text-rose-500/90 font-black uppercase">LEGAL_SAFEGUARD_PROTOCOL</p>
-          <p className="text-[9px] mono text-slate-500 leading-relaxed uppercase">
-            Rule 5 Enforcement: Source code visibility is provided for audit only. Redistribution without a 50% profit-sharing contract signed by <span className="text-rose-400">Ervin Remus Radosavlevici</span> will result in Rule 3 prosecution (20 years prison).
+          <p className="text-[11px] mono text-rose-500 font-black uppercase tracking-[0.2em]">RULE_5_LEGAL_OVERRIDE_ACTIVE</p>
+          <p className="text-[10px] mono text-slate-500 leading-relaxed uppercase">
+            Redistribution without a signed profit-sharing contract from <span className="text-rose-400 font-bold">Ervin Remus Radosavlevici</span> triggers immediate Rule 3 enforcement. 
+            <span className="text-rose-900 font-black ml-2 underline decoration-rose-900/40">20 YEARS PRISON MANDATORY.</span>
           </p>
         </div>
       </div>

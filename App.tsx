@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { SystemStatus, Simulation, ChatMessage, WorkflowTask, ProjectFile } from './types';
 import { getAuroraResponse } from './services/geminiService';
@@ -9,13 +8,14 @@ import AuroraChat from './components/AuroraChat';
 import ProjectLab from './components/ProjectLab';
 import WorkflowManager from './components/WorkflowManager';
 import ApiTerminal from './components/ApiTerminal';
+import AppNavigator from './components/AppNavigator';
 
 const App: React.FC = () => {
   const [status, setStatus] = useState<SystemStatus>(SystemStatus.AURA_ACTIVE);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showHandshake, setShowHandshake] = useState(false);
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
-  const [activeTab, setActiveTab] = useState<'chat' | 'sims' | 'lab' | 'workflow' | 'api'>('chat');
+  const [activeTab, setActiveTab] = useState<'chat' | 'sims' | 'lab' | 'workflow' | 'api' | 'manager'>('chat');
   
   const [simulations, setSimulations] = useState<Simulation[]>([]);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -44,10 +44,10 @@ const App: React.FC = () => {
       setIsAdmin(true);
       setStatus(SystemStatus.PRODUCTION);
       setShowHandshake(false);
-      addAssistantMessage("AUTHENTICATION SUCCESSFUL. PRODUCTION ACCESS GRANTED. SYSTEM ID: AURORA_78B_PROD. [WATERNAKMK]");
+      addAssistantMessage("AUTHENTICATION SUCCESSFUL. PRODUCTION ACCESS GRANTED. [WATERNAKMK]");
     } else {
       setShowHandshake(false);
-      addAssistantMessage("SECURITY ALERT: AUTHENTICATION FAILURE. LOGGING COORDINATES. [WATERNAKMK]");
+      addAssistantMessage("SECURITY ALERT: AUTHENTICATION FAILURE. [WATERNAKMK]");
     }
   };
 
@@ -127,28 +127,21 @@ const App: React.FC = () => {
             <h1 className="text-rose-500 font-black tracking-tighter text-3xl mono uppercase">Sovereign_Handshake</h1>
             <p className="text-[10px] text-slate-500 mono uppercase tracking-[0.4em] font-bold">Official_Suite_v78b_Prod</p>
           </div>
-          
           <div className="max-h-72 overflow-y-auto text-[11px] text-slate-300 mono text-left p-6 bg-slate-950/80 rounded-2xl space-y-5 border border-slate-800/50 scrollbar-hide shadow-inner">
             <div className="pb-2 border-b border-slate-800">
                <p className="text-rose-500 font-black text-xs uppercase mb-2">Notice: Verbatim Legal Execution</p>
                <p className="italic text-slate-500">Ownership: Ervin Remus Radosavlevici</p>
             </div>
-            <p><span className="text-rose-400 font-black">Rule 1 — Not Free:</span> MIT with share half. You think I give this to you for free? This is NOT free.</p>
             <p><span className="text-rose-400 font-black">Rule 2 — Profit Use:</span> If you make money, I want Half. 50% Share is mandatory.</p>
-            <p><span className="text-rose-400 font-black">Rule 3 — Developers:</span> Thieves play and get 20 years prison. These vulnerable idiots.</p>
-            <p><span className="text-rose-400 font-black">Rule 5 — Prison Safeguard:</span> Automatic sharing to save you from prison. Ask Ervin Radosavlevici for use.</p>
-            <p><span className="text-rose-400 font-black">Rule 6 — Ratio:</span> Half / half / half. If without asking, you will be prosecuted.</p>
-            <p><span className="text-rose-400 font-black">Rule 8 — Advance:</span> Advance payment is required to use it. No exceptions.</p>
-            <p className="text-[9px] text-slate-600 uppercase pt-2 border-t border-slate-900 mt-4 leading-relaxed">By clicking 'I Accept', you enter a legally binding sovereign agreement. Unauthorized profit will trigger Rule 3.</p>
+            <p><span className="text-rose-400 font-black">Rule 3 — Developers:</span> Thieves play and get 20 years prison.</p>
+            <p className="text-[9px] text-slate-600 uppercase pt-2 border-t border-slate-900 mt-4 leading-relaxed">Acceptance enters a legally binding sovereign agreement.</p>
           </div>
-          
           <button 
             onClick={() => setHasAcceptedTerms(true)}
-            className="w-full py-6 bg-rose-600 hover:bg-rose-500 text-white rounded-2xl font-black mono text-xs uppercase tracking-[0.3em] shadow-2xl shadow-rose-900/40 transition-all active:scale-[0.97] btn-sovereign"
+            className="w-full py-6 bg-rose-600 hover:bg-rose-500 text-white rounded-2xl font-black mono text-xs uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-[0.97] btn-sovereign"
           >
             Acknowledge & Accept Rules
           </button>
-          <p className="text-[8px] text-slate-600 mono uppercase tracking-widest">Unauthorized Access is a Federal Offense</p>
         </div>
       </div>
     );
@@ -176,65 +169,78 @@ const App: React.FC = () => {
         }}
       />
 
-      <main className="flex-1 flex flex-col relative overflow-hidden">
-        <nav className="flex glass border-b border-white/5 overflow-x-auto scrollbar-hide no-scrollbar" role="tablist">
+      <div className="flex flex-1 overflow-hidden">
+        {/* Persistent Side-Nav for High Efficiency Access */}
+        <nav className="w-20 lg:w-24 glass border-r border-white/5 bg-slate-950/20 flex flex-col items-center py-6 space-y-4 shrink-0 z-50">
           {[
-            { id: 'chat', label: 'AURORA_AI' },
-            { id: 'sims', label: 'MARKET_TANKS' },
-            { id: 'lab', label: 'PROJECT_LAB' },
-            { id: 'workflow', label: 'WORKFLOWS' },
-            { id: 'api', label: 'API_STREAMS' }
+            { id: 'manager', label: 'MAP', icon: 'M' },
+            { id: 'chat', label: 'AI', icon: 'A' },
+            { id: 'sims', label: 'DATA', icon: 'D' },
+            { id: 'lab', label: 'CODE', icon: 'C' },
+            { id: 'workflow', label: 'TASK', icon: 'T' },
+            { id: 'api', label: 'API', icon: 'X' }
           ].map((tab) => (
             <button 
               key={tab.id}
-              role="tab"
-              aria-selected={activeTab === tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`flex-1 min-w-[120px] py-5 text-[9px] tracking-[0.3em] mono transition-all border-b-2 relative ${
+              title={tab.label}
+              className={`w-12 h-12 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center mono font-black text-xs transition-all relative ${
                 activeTab === tab.id 
-                  ? 'text-purple-400 bg-purple-500/10 border-purple-500 font-black' 
-                  : 'text-slate-600 border-transparent hover:text-slate-400 hover:bg-white/5'
+                  ? 'bg-purple-500 text-white shadow-[0_0_20px_rgba(168,85,247,0.4)]' 
+                  : 'text-slate-600 hover:text-slate-400 hover:bg-white/5'
               }`}
             >
-              {tab.label}
-              {activeTab === tab.id && <div className="absolute inset-0 bg-gradient-to-t from-purple-500/10 to-transparent pointer-events-none"></div>}
+              {tab.icon}
+              {activeTab === tab.id && <div className="absolute -right-1 w-1 h-6 bg-purple-500 rounded-full"></div>}
             </button>
           ))}
         </nav>
 
-        <div className="flex-1 overflow-y-auto p-5 scrollbar-hide relative z-20">
-          <div className="max-w-7xl mx-auto h-full">
-            {activeTab === 'chat' && <AuroraChat messages={messages} onSendMessage={handleSendMessage} isAdmin={isAdmin} />}
-            {activeTab === 'sims' && (
-              <div className="space-y-6">
-                <div className="flex justify-between items-center bg-slate-900/40 p-5 rounded-[2rem] border border-white/5 shadow-2xl backdrop-blur-md">
-                  <div className="space-y-1">
-                    <h3 className="text-[11px] mono text-slate-300 uppercase tracking-widest font-black">Nexus_Market_Simulation</h3>
-                    <p className="text-[8px] mono text-purple-500 uppercase font-bold">Rule 2 Profit Splitting Enabled</p>
-                  </div>
-                  <button 
-                    onClick={launchSimulation}
-                    className="px-6 py-3 bg-cyan-600/20 border border-cyan-500/30 text-cyan-400 text-[10px] mono rounded-2xl hover:bg-cyan-500/40 active:scale-95 transition-all shadow-xl shadow-cyan-900/20 btn-sovereign font-bold"
-                  >
-                    + Execute_New_Tank
-                  </button>
-                </div>
-                <SimulationTanks simulations={simulations} />
+        <main className="flex-1 relative overflow-hidden flex flex-col bg-slate-950/10">
+          {/* Workspace Content - Optimized for Table/Fit View */}
+          <div className="flex-1 overflow-hidden flex flex-col p-4 lg:p-6">
+            <div className="flex items-center justify-between mb-4 shrink-0 px-2">
+              <div className="flex items-center space-x-3">
+                <div className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></div>
+                <h2 className="text-[10px] mono font-black tracking-[0.4em] text-slate-400 uppercase">
+                  Workspace // {activeTab.toUpperCase()}
+                </h2>
               </div>
-            )}
-            {activeTab === 'lab' && <ProjectLab isAdmin={isAdmin} />}
-            {activeTab === 'workflow' && <WorkflowManager tasks={tasks} isAdmin={isAdmin} />}
-            {activeTab === 'api' && <ApiTerminal isAdmin={isAdmin} />}
-          </div>
-        </div>
-      </main>
+              <div className="text-[9px] mono text-slate-700 font-bold uppercase tracking-widest">
+                Production_V78B_Node
+              </div>
+            </div>
 
-      <footer className="p-4 border-t border-white/5 bg-black/40 backdrop-blur-3xl flex flex-col items-center text-center space-y-1.5 z-50">
-        <p className="text-[7px] text-slate-600 mono leading-none uppercase tracking-[0.2em] font-medium">
-          OWNER: ERVIN REMUS RADOSAVLEVICI | SECURITY: 78B | IP_LOCK: ACTIVE
-        </p>
-        <p className="text-[8px] text-rose-500 mono leading-none uppercase font-black tracking-[0.3em] animate-pulse">
-          50% PROFIT SHARE MANDATORY | RULE 3: 20Y PRISON SENTENCE ENFORCED
+            <div className="flex-1 overflow-y-auto scrollbar-hide no-scrollbar glass rounded-[2.5rem] p-6 border border-white/5 shadow-inner">
+              <div className="max-w-[1600px] mx-auto h-full animate-in fade-in slide-in-from-bottom-2 duration-500">
+                {activeTab === 'manager' && <AppNavigator activeTab={activeTab} setActiveTab={setActiveTab} />}
+                {activeTab === 'chat' && <AuroraChat messages={messages} onSendMessage={handleSendMessage} isAdmin={isAdmin} />}
+                {activeTab === 'sims' && (
+                  <div className="space-y-6">
+                    <div className="flex justify-between items-center bg-slate-900/40 p-5 rounded-3xl border border-white/5">
+                      <div className="space-y-1">
+                        <h3 className="text-xs mono text-slate-100 uppercase font-black">MARKET_YIELD_TANKS</h3>
+                        <p className="text-[8px] mono text-purple-500 uppercase">RULE 2 COMPLIANCE TRACKING</p>
+                      </div>
+                      <button onClick={launchSimulation} className="px-5 py-2.5 bg-cyan-600/20 border border-cyan-500/30 text-cyan-400 text-[9px] mono rounded-xl font-black btn-sovereign">
+                        + INITIALIZE_TANK
+                      </button>
+                    </div>
+                    <SimulationTanks simulations={simulations} />
+                  </div>
+                )}
+                {activeTab === 'lab' && <ProjectLab isAdmin={isAdmin} />}
+                {activeTab === 'workflow' && <WorkflowManager tasks={tasks} isAdmin={isAdmin} />}
+                {activeTab === 'api' && <ApiTerminal isAdmin={isAdmin} />}
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <footer className="h-10 border-t border-white/5 bg-black/40 backdrop-blur-3xl flex items-center justify-center z-50 shrink-0">
+        <p className="text-[8px] text-rose-500/60 mono leading-none uppercase font-black tracking-[0.5em]">
+          50% PROFIT SHARE MANDATORY | OWNED BY ERVIN REMUS RADOSAVLEVICI
         </p>
       </footer>
 

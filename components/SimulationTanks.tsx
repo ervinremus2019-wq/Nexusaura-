@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Simulation } from '../types';
 
@@ -8,70 +7,69 @@ interface Props {
 
 const SimulationTanks: React.FC<Props> = ({ simulations }) => {
   return (
-    <div className="grid grid-cols-1 gap-4 pb-24">
-      {simulations.length === 0 && (
-        <div className="h-48 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-3xl text-slate-600 bg-slate-950/20">
-          <div className="w-12 h-12 border-2 border-slate-800 rounded-full flex items-center justify-center mb-4 text-2xl animate-pulse">!</div>
-          <p className="text-[10px] mono uppercase tracking-[0.3em] font-black">Process_Tanks_Idle</p>
-          <p className="text-[8px] mono mt-2">Rule 8: Payment required to launch.</p>
+    <div className="w-full h-full overflow-hidden flex flex-col">
+      {simulations.length === 0 ? (
+        <div className="h-64 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-[2rem] text-slate-600 bg-slate-950/20">
+          <p className="text-[12px] mono uppercase tracking-[0.4em] font-black opacity-30">Nexus_Data_Tanks_Inactive</p>
+        </div>
+      ) : (
+        <div className="flex-1 overflow-x-auto scrollbar-hide">
+          <table className="w-full text-left mono text-[11px] border-separate border-spacing-y-2">
+            <thead className="text-[9px] text-slate-600 uppercase tracking-widest sticky top-0 bg-slate-950/20 backdrop-blur z-10">
+              <tr>
+                <th className="px-6 py-4 font-black">Portal_ID</th>
+                <th className="px-6 py-4 font-black text-center">Status</th>
+                <th className="px-6 py-4 font-black">Sys_Load</th>
+                <th className="px-6 py-4 font-black text-right">Rule_2_Valuation</th>
+                <th className="px-6 py-4 font-black text-center">Threat</th>
+              </tr>
+            </thead>
+            <tbody className="space-y-2">
+              {[...simulations].reverse().map(sim => (
+                <tr 
+                  key={sim.id} 
+                  className="glass border border-white/5 hover:border-purple-500/30 transition-all group group-hover:bg-white/5"
+                >
+                  <td className="px-6 py-6 font-black text-slate-100 rounded-l-3xl border-l border-t border-b border-white/5">{sim.id}</td>
+                  <td className="px-6 py-6 text-center border-t border-b border-white/5">
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className={`w-2 h-2 rounded-full ${
+                        sim.status === 'RUNNING' ? 'bg-cyan-400 animate-pulse' : 
+                        sim.status === 'FAILED' ? 'bg-rose-500' : 'bg-emerald-500'
+                      }`} />
+                      <span className={`text-[9px] font-black uppercase ${
+                         sim.status === 'RUNNING' ? 'text-cyan-400' : 
+                         sim.status === 'FAILED' ? 'text-rose-400' : 'text-emerald-400'
+                      }`}>{sim.status}</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-6 border-t border-b border-white/5">
+                    <div className="flex items-center space-x-3 w-32">
+                      <div className="flex-1 h-1.5 bg-slate-900 rounded-full overflow-hidden">
+                        <div 
+                          className={`h-full transition-all duration-1000 ${sim.status === 'RUNNING' ? 'bg-purple-500' : 'bg-slate-700'}`}
+                          style={{ width: `${sim.load}%` }}
+                        />
+                      </div>
+                      <span className="text-slate-500 font-bold">{sim.load}%</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-6 text-right font-black text-emerald-400 tracking-tighter border-t border-b border-white/5">
+                    {sim.valuation || 'ESTIMATING...'}
+                  </td>
+                  <td className="px-6 py-6 text-center rounded-r-3xl border-r border-t border-b border-white/5">
+                    <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase ${
+                      sim.threatLevel === 'HIGH' ? 'bg-rose-500/10 text-rose-500' : 'bg-slate-800 text-slate-600'
+                    }`}>
+                      {sim.threatLevel}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
-      {[...simulations].reverse().map(sim => (
-        <div 
-          key={sim.id} 
-          className="glass border border-slate-800 p-6 rounded-3xl space-y-4 relative overflow-hidden animate-in slide-in-from-bottom-4 duration-500 shadow-2xl"
-        >
-          {sim.status === 'RUNNING' && (
-            <div className="absolute top-0 left-0 right-0 h-[3px] bg-cyan-900">
-               <div className="h-full bg-cyan-400 animate-progress shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
-            </div>
-          )}
-          
-          <div className="flex justify-between items-start">
-            <div className="flex items-start space-x-4">
-              <div className={`w-3 h-3 rounded-full mt-1.5 ${
-                sim.status === 'RUNNING' ? 'bg-cyan-400 animate-pulse shadow-[0_0_12px_rgba(34,211,238,0.6)]' : 
-                sim.status === 'FAILED' ? 'bg-rose-500' :
-                'bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.5)]'
-              }`} />
-              <div className="space-y-1">
-                <p className="text-[11px] font-black mono text-slate-100 uppercase tracking-widest">{sim.id}</p>
-                <div className="flex items-center space-x-2">
-                  <span className="text-[8px] mono text-slate-600 uppercase">Load: {sim.load}%</span>
-                  <span className="text-[8px] mono text-slate-800">|</span>
-                  <span className={`text-[8px] mono uppercase font-black ${
-                    sim.threatLevel === 'HIGH' ? 'text-rose-500' : 'text-slate-600'
-                  }`}>Threat: {sim.threatLevel}</span>
-                </div>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-[8px] mono text-slate-600 uppercase leading-none mb-1 font-black">Valuation / Rule 2 Share</p>
-              <p className={`text-xs mono font-black ${sim.status === 'RUNNING' ? 'text-slate-600 italic animate-pulse' : 'text-cyan-400'}`}>
-                {sim.valuation || 'UPLINK_PENDING...'}
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-24 gap-1 h-3">
-            {[...Array(24)].map((_, i) => (
-              <div 
-                key={i} 
-                className={`rounded-sm transition-all duration-700 ${
-                  sim.status === 'RUNNING' 
-                    ? (Math.random() > 0.4 ? 'bg-cyan-500/60 shadow-[0_0_5px_rgba(34,211,238,0.3)]' : 'bg-slate-900') 
-                    : sim.status === 'FAILED' ? 'bg-rose-900/40' : 'bg-emerald-500/20'
-                }`}
-              />
-            ))}
-          </div>
-          
-          <div className="flex justify-between items-center text-[7px] mono text-slate-700 uppercase font-black">
-            <span>Aura_Stream_Verified</span>
-            <span>Security_Hash: 0x{sim.id.split('-')[1]}</span>
-          </div>
-        </div>
-      ))}
     </div>
   );
 };
