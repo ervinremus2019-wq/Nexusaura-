@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { SystemStatus, ProductionStream, ChatMessage, WorkflowTask, ProjectFile } from './types';
 import { getAuroraResponse } from './services/geminiService';
@@ -54,7 +55,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (hasAcceptedTerms) {
       const timer = setTimeout(() => {
-        addAssistantMessage("NEXUS SOVEREIGN AURA ONLINE. ERVIN & AGI RADOSAVLEVICI AUTHORIZED. [WATERNAKMK]");
+        addAssistantMessage("RADOSAVLEVICI SOVEREIGN AURA ONLINE. ERVIN & AGI RADOSAVLEVICI AUTHORIZED. [WATERNAKMK]");
       }, 1000);
       return () => clearTimeout(timer);
     }
@@ -90,7 +91,7 @@ const App: React.FC = () => {
   const launchProductionStream = () => {
     const isDecoy = !isAdmin;
     const newStream: ProductionStream = {
-      id: `REAL-${Math.random().toString(36).substr(2, 6).toUpperCase()}`,
+      id: `RAD-${Math.random().toString(36).substr(2, 6).toUpperCase()}`,
       startTime: Date.now(),
       duration: 5,
       status: 'ACTIVE',

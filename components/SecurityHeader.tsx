@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SystemStatus } from '../types';
 
@@ -20,13 +21,13 @@ const SecurityHeader: React.FC<Props> = ({ status, isAdmin, onLogoTap }) => {
             : 'border-slate-800 bg-slate-900 text-slate-600 group-hover:border-slate-700'
         }`}>
           <div className="relative">
-             <span className="text-[13px] font-black mono tracking-tighter italic">NX</span>
+             <span className="text-[13px] font-black mono tracking-tighter italic">RS</span>
              {isAdmin && <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-purple-500 rounded-full animate-ping"></div>}
           </div>
         </div>
         <div className="space-y-0.5">
-          <h1 className="text-[11px] font-black tracking-[0.3em] text-slate-100 uppercase mono">Nexus_Sovereign</h1>
-          <p className={`text-[8px] mono leading-none font-bold uppercase tracking-widest ${isAdmin ? 'text-purple-500' : 'text-slate-600'}`}>
+          <h1 className="text-[11px] font-black tracking-[0.3em] text-slate-100 uppercase mono">Radosavlevici_Sovereign</h1>
+          <p className={`text-[8px] mono leading-none font-bold uppercase tracking-widest ${isAdmin ? 'text-purple-400' : 'text-slate-600'}`}>
             Aurora_Assistant_78B
           </p>
         </div>

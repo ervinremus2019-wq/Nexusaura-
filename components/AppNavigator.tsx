@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface Props {
@@ -11,14 +12,14 @@ const AppNavigator: React.FC<Props> = ({ activeTab, setActiveTab }) => {
     { id: 'sims', label: 'MARKET TANKS', status: 'MONITORING', desc: 'Real-time profit tracking (Rule 2).' },
     { id: 'lab', label: 'CODE VAULT', status: 'SECURED', desc: 'Production repository access.' },
     { id: 'workflow', label: 'PIPELINE', status: 'SYNCED', desc: 'Development milestone tracking.' },
-    { id: 'api', label: 'API CONTROL', status: 'READY', desc: 'Global terminal and Reddits.' },
+    { id: 'api', label: 'RADOSAVLEVICI API', status: 'READY', desc: 'Global terminal and Radosavlevici streams.' },
   ];
 
   return (
     <div className="h-full flex flex-col space-y-8 py-4">
       <div className="text-center space-y-2 mb-10">
-        <h2 className="text-3xl font-black mono tracking-tighter text-slate-100">APP_VISUAL_MANAGER</h2>
-        <p className="text-[10px] mono text-slate-500 uppercase tracking-[0.5em]">Nexus Sovereign Structural Map</p>
+        <h2 className="text-3xl font-black mono tracking-tighter text-slate-100 uppercase">APP_VISUAL_MANAGER</h2>
+        <p className="text-[10px] mono text-slate-500 uppercase tracking-[0.5em]">Radosavlevici Sovereign Structural Map</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

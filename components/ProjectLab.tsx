@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ProjectFile } from '../types';
 
@@ -14,7 +15,7 @@ const ProjectLab: React.FC<Props> = ({ isAdmin }) => {
       name: 'index.html',
       language: 'html',
       lastModified: '2026-03-12',
-      content: `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>NEXUS SOVEREIGN AURA</title>\n</head>\n<body>\n  <div id="root"></div>\n  <!-- OWNERS: ERVIN & AGI RADOSAVLEVICI -->\n  <!-- RULE 6 ENFORCEMENT: 50% PROFIT SHARE REQUIRED -->\n</body>\n</html>`
+      content: `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>RADOSAVLEVICI SOVEREIGN AURA</title>\n</head>\n<body>\n  <div id="root"></div>\n  <!-- OWNERS: ERVIN & AGI RADOSAVLEVICI -->\n  <!-- RULE 6 ENFORCEMENT: 50% PROFIT SHARE REQUIRED -->\n</body>\n</html>`
     },
     {
       id: 'f2',
@@ -50,7 +51,7 @@ const ProjectLab: React.FC<Props> = ({ isAdmin }) => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `nexus_project_${file.name}`;
+        a.download = `radosavlevici_project_${file.name}`;
         a.click();
         URL.revokeObjectURL(url);
       }, idx * 300);

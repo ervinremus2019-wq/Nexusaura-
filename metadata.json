@@ -1,6 +1,6 @@
 {
-  "name": "NEXUS SOVEREIGN AURA",
-  "description": "AURORA_ASSISTANT_DECOY suite. High-security production dashboard featuring parallel decoy simulations, AI Agent Terminal for natural language command processing, and authenticated admin logic.",
+  "name": "RADOSAVLEVICI SOVEREIGN AURA",
+  "description": "AURORA_ASSISTANT_DECOY suite. High-security production dashboard featuring parallel decoy simulations, AI Agent Terminal for natural language command processing, and authenticated admin logic for the RADOSAVLEVICI API.",
   "requestFramePermissions": [
     "microphone"
   ]

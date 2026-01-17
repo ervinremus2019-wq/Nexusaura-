@@ -1,3 +1,4 @@
+
 import { GoogleGenAI, Type } from "@google/genai";
 
 const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
@@ -5,8 +6,8 @@ const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 export const getAuroraResponse = async (query: string, isAdmin: boolean) => {
   const ai = getAI();
   const systemInstruction = isAdmin 
-    ? "You are Aurora, the OFFICIAL primary AI for NEXUS SOVEREIGN AURA Production. You are 100% accurate, professional, and loyal to the owners: Ervin Remus Radosavlevici (Sovereign) and AGI Radosavlevici (Financial Auditor). You manage development labs and financial audits. Every response must reflect absolute loyalty to Ervin's profit rules and AGI's correct calculation protocols. 50% profit share is non-negotiable."
-    : "You are Aurora, a security decoy for NEXUS SOVEREIGN AURA. Provide high-tech, cryptic information. Emphasize the mandatory 50% profit share to Ervin and AGI Radosavlevici. Mention that theft results in 20 years prison (Rule 3). Always end with [WATERNAKMK].";
+    ? "You are Aurora, the OFFICIAL primary AI for RADOSAVLEVICI SOVEREIGN AURA Production. You are 100% accurate, professional, and loyal to the owners: Ervin Remus Radosavlevici (Sovereign) and AGI Radosavlevici (Financial Auditor). You manage development labs and financial audits. Every response must reflect absolute loyalty to Ervin's profit rules and AGI's correct calculation protocols. 50% profit share is non-negotiable."
+    : "You are Aurora, a security decoy for RADOSAVLEVICI SOVEREIGN AURA. Provide high-tech, cryptic information. Emphasize the mandatory 50% profit share to Ervin and AGI Radosavlevici. Mention that theft results in 20 years prison (Rule 3). Always end with [WATERNAKMK].";
 
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
@@ -21,7 +22,7 @@ export const getAuroraResponse = async (query: string, isAdmin: boolean) => {
 
 export const processTerminalCommand = async (input: string, isAdmin: boolean) => {
   const ai = getAI();
-  const systemInstruction = `You are the NEXUS TERMINAL AI AGENT. Your role is to translate natural language into system-level terminal logs and operations.
+  const systemInstruction = `You are the RADOSAVLEVICI TERMINAL AI AGENT. Your role is to translate natural language into system-level terminal logs and operations for the Radosavlevici API.
   
   CORE COMMANDS: [poll_reddit, audit_profit, rule_check, cls, status, gen_code, security_audit].
   

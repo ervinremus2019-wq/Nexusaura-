@@ -15,7 +15,7 @@ interface CommandHistoryEntry {
 
 const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
   const [logs, setLogs] = useState<string[]>([
-    "BOOT: NEXUS_API_BRIDGE_V78B_PROD",
+    "BOOT: RADOSAVLEVICI_API_BRIDGE_V78B_PROD",
     "HANDSHAKE: REDDIT_CORE_UPLINK_STABLE",
     "ETHICS: HUMAN_RIGHTS_PROTOCOL_V4_LOADED",
     "WATCHDOG: PROFIT_MONITOR_ACTIVE",
@@ -43,10 +43,10 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
     setCommand('');
     
     // Initial user entry in terminal
-    setLogs(prev => [...prev, `nexus@aurora:~$ ${rawInput}`]);
+    setLogs(prev => [...prev, `radosavlevici@aurora:~$ ${rawInput}`]);
 
     if (cmdLower === 'cls') {
-      setLogs(["BOOT: NEXUS_API_BRIDGE_RESTARTED"]);
+      setLogs(["BOOT: RADOSAVLEVICI_API_BRIDGE_RESTARTED"]);
       setCommandStream([]);
       return;
     }
@@ -72,7 +72,7 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
     if (aiResponse.output) newLogs.push(`>> ${aiResponse.output}`);
     
     if (aiResponse.commandUsed === 'audit_profit' || aiResponse.commandUsed === 'rule_check') {
-      newLogs.push("NOTICE: Rule 2 and 6 monitored via Ervin Protocol.");
+      newLogs.push("NOTICE: Rule 2 and 6 monitored via Radosavlevici Protocol.");
     }
 
     setLogs(prev => [...prev, ...newLogs].slice(-50));
@@ -82,12 +82,12 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
     <div className="h-full flex flex-col space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex justify-between items-center px-1">
         <div className="space-y-0.5">
-          <h3 className="text-[10px] mono text-slate-500 uppercase tracking-widest font-black">Production API / Global Streams</h3>
+          <h3 className="text-[10px] mono text-slate-500 uppercase tracking-widest font-black">Radosavlevici API / Global Streams</h3>
           <p className="text-[8px] mono text-slate-700 uppercase">Interpretation & Execution Dashboard</p>
         </div>
         <div className="flex space-x-2">
            <button 
-             onClick={() => setLogs(["BOOT: NEXUS_API_BRIDGE_RESTARTED"])}
+             onClick={() => setLogs(["BOOT: RADOSAVLEVICI_API_BRIDGE_RESTARTED"])}
              className="px-3 py-1 bg-slate-800 text-slate-500 text-[9px] mono rounded hover:text-slate-300 transition-colors uppercase"
            >
              Clear_Buffer
@@ -106,7 +106,7 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
                 <span className="text-slate-800 select-none opacity-50 font-bold tracking-tighter">[{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}]</span>
                 <span className={`break-all ${
                   log.includes('ERR') || log.includes('ALERT') ? 'text-rose-500 font-bold' : 
-                  log.includes('nexus@aurora') ? 'text-cyan-400 font-black tracking-tight' : 
+                  log.includes('radosavlevici@aurora') ? 'text-cyan-400 font-black tracking-tight' : 
                   log.startsWith('>>') ? 'text-purple-400 font-bold' :
                   'text-emerald-500/80'
                 }`}>
@@ -124,7 +124,7 @@ const ApiTerminal: React.FC<Props> = ({ isAdmin }) => {
           </div>
 
           <form onSubmit={handleCommand} className="p-4 bg-slate-900/30 border-t border-slate-800/50 flex items-center space-x-3">
-            <span className="text-purple-500 font-black mono text-xs">nexus@aurora:~$</span>
+            <span className="text-purple-500 font-black mono text-xs">radosavlevici@aurora:~$</span>
             <input 
               type="text" 
               autoFocus

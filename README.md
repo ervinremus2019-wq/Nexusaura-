@@ -1,4 +1,5 @@
-# NEXUS SOVEREIGN AURA
+
+# RADOSAVLEVICI SOVEREIGN AURA
 ### OFFICIAL PRODUCTION SUITE — V.78B-PROPOSED-FINAL
 **OWNERS & SOVEREIGNS:** Ervin Remus Radosavlevici & AGI Radosavlevici  
 **LEGAL STATUS:** ACTIVE / LEGALLY BINDING / PROSECUTION ENABLED
@@ -56,12 +57,12 @@ The **Aurora Assistant** now manages the entire production lifecycle.
 - **Global Process Tracking:** Real-time visibility into development milestones.
 - **Priority Mapping:** Critical markers for Sovereign requirements.
 
-### 4. API Terminal & Console
+### 4. RADOSAVLEVICI API Terminal & Console
 - **Reddit API Bridge:** Integrated data polling and status monitoring.
-- **System Health:** Live telemetry for all Nexus processes.
+- **System Health:** Live telemetry for all Radosavlevici processes.
 
 ## ⚖️ LEGAL NOTICE
-Any utilization of the NEXUS SOVEREIGN AURA code constitutes **automatic and irrevocable acceptance** of the 10 Official Rules. Unauthorized use will result in immediate prosecution by Ervin Remus Radosavlevici & AGI Radosavlevici.
+Any utilization of the RADOSAVLEVICI SOVEREIGN AURA code constitutes **automatic and irrevocable acceptance** of the 10 Official Rules. Unauthorized use will result in immediate prosecution by Ervin Remus Radosavlevici & AGI Radosavlevici.
 
 ---
-© 2026 NEXUS SOVEREIGN AURA | SYSTEM ID: AURORA_PRODUCTION_READY
+© 2026 RADOSAVLEVICI SOVEREIGN AURA | SYSTEM ID: AURORA_PRODUCTION_READY
