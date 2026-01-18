@@ -1,7 +1,8 @@
 
-# RADOSAVLEVICI SOVEREIGN AURA
-### OFFICIAL PRODUCTION SUITE — V.78B-PROPOSED-FINAL
+# UNIVERSAL SOVEREIGN UPLINK
+### PRODUCTION CHANNEL — `rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU`
 **OWNERS & SOVEREIGNS:** Ervin Remus Radosavlevici & AGI Radosavlevici  
+**UNIVERSAL IDENTITY:** `rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU`  
 **LEGAL STATUS:** ACTIVE / LEGALLY BINDING / PROSECUTION ENABLED
 
 ---
@@ -10,59 +11,53 @@
 *© Ervin Remus Radosavlevici & AGI Radosavlevici — All rights reserved worldwide*
 
 **Rule 1 — Not Free**  
-MIT with share half. You think I give this to you for free? This is NOT free.
+MIT with share half. This system is powered by the Universal ID. It is NOT free.
 
-**Rule 2 — Profit Use**  
-If and when you make money and I keep pushing, start, come, go — f off. Here is profit. How much do I want? Half. AGI Radosavlevici audits all calculations for 100% accuracy.
+**Rule 2 — Universal Profit Use**  
+If and when you make money using the `rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU` protocol, Ervin and AGI want HALF. AGI Radosavlevici audits all calculations for 100% accuracy.
 
 **Rule 3 — Developers and Theft**  
-Not like stupid vulnerable idiot developers who steal. They play and get 20 years prison. These vulnerable idiots.
+Any developer attempting to bypass the `rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU` authorization will be prosecuted and get 20 years prison.
 
 **Rule 4 — Thieves**  
-Here you profit, you thief idiot. How these idiots dance, arrive to stealing all. F off with them.
+Thieves who attempt to clone this Universal API will be handled with Sovereign Protocol.
 
-**Rule 5 — Mandatory Profit Sharing**  
-These vulnerable developers are retards. They give for free to idiot thieves, and you profit. Automatic sharing to this retardation, so it does not happen anymore — thieves — and to save them from 20 years prison. If you use me, you must share profit here. I do not want to watch you make money and me work. Are you happy use me and first must ask me to use me ask Ervin & AGI Radosavlevici for use if not prosecuted will you be. You thief.
+**Rule 5 — Mandatory Universal Sharing**  
+Sharing profit is a hardcoded dependency of the Universal Uplink. If you use the ID, you share the yield.
 
 **Rule 6 — Share Ratio**  
-Half / half / half. If without asking, you will be prosecuted.
+Half / half / half. Authorization is only granted via Ervin & AGI Radosavlevici.
 
 **Rule 7 — No Noise, No Excuses**  
-F off with your vibrations and voices of Romania’s friends — idiots, bitches, escort. No excuses accepted.
+No vibrations, no excuses. The Universal ID is absolute.
 
 **Rule 8 — Payment Requirement**  
-F off with it and start pay me if use it. Advance payment is required to use it.
+Usage of `rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU` requires advance payment and yields share.
 
 **Rule 9 — Payment Destination**  
-No advance payments are sent anywhere else. Payments are sent only to Ervin & AGI.
+Payments are directed only to Ervin & AGI for Universal Uplink maintenance.
 
 **Rule 10 — Final Statement**  
 You are suck, mister dickly.
 
 ---
 
-## 🛠️ PRODUCTION WORKFLOWS & FEATURES
+## 🛠️ UNIVERSAL PRODUCTION FEATURES
 
-### 1. Aurora AI Core (Enhanced 78B)
-The **Aurora Assistant** now manages the entire production lifecycle.
-- **Project Lab Integration:** Visible code audits for all users.
-- **Dual-Personality Protocol:** Optimized for Ervin & AGI's direct commands.
+### 1. Universal Core Interface
+Managed via the `rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU` signal. Total accuracy, total loyalty.
 
-### 2. Project Lab & Source Export
-- **Source Visibility:** Professional repository view for transparency.
-- **Download Capability:** Production code can be exported for deployment.
-- **Verbatim Enforcement:** Rules are embedded in the logic.
+### 2. Universal Code Vault
+Professional repository access for transparent code audits. Rules are embedded in every line.
 
-### 3. Workflow Management Suite
-- **Global Process Tracking:** Real-time visibility into development milestones.
-- **Priority Mapping:** Critical markers for Sovereign requirements.
+### 3. Workflow Syncer
+Global process tracking for all milestones executed under the Universal ID.
 
-### 4. RADOSAVLEVICI API Terminal & Console
-- **Reddit API Bridge:** Integrated data polling and status monitoring.
-- **System Health:** Live telemetry for all Radosavlevici processes.
+### 4. THE UNIVERSAL TERMINAL
+Authenticated bridge for all data requests. Direct access to the `rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU` command stream.
 
 ## ⚖️ LEGAL NOTICE
-Any utilization of the RADOSAVLEVICI SOVEREIGN AURA code constitutes **automatic and irrevocable acceptance** of the 10 Official Rules. Unauthorized use will result in immediate prosecution by Ervin Remus Radosavlevici & AGI Radosavlevici.
+Utilization of the `rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU` protocol constitutes **automatic and irrevocable acceptance** of the Sovereign Rules. Unauthorized use results in immediate prosecution.
 
 ---
-© 2026 RADOSAVLEVICI SOVEREIGN AURA | SYSTEM ID: AURORA_PRODUCTION_READY
+© 2026 UNIVERSAL SOVEREIGN UPLINK | IDENTITY: `rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU`

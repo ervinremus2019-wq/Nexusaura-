@@ -1,150 +1,110 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RADOSAVLEVICI SOVEREIGN AURA | PRODUCTION_V78B</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>SOVEREIGN rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --accent-purple: #a855f7;
-            --accent-cyan: #22d3ee;
+            --accent-cyan: #06b6d4;
             --accent-rose: #f43f5e;
-            --bg-deep: #020617;
+            --bg-deep: #000000;
+            --surface: #121212;
+            --user-bubble: #a855f7;
+            --ai-bubble: #262626;
         }
         
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-deep);
-            color: #f8fafc;
+            color: #ffffff;
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             height: 100vh;
             position: relative;
         }
 
-        /* Sovereign Grid Background */
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -1;
-            pointer-events: none;
+        #root { 
+            height: 100%; 
+            display: flex; 
+            flex-direction: column; 
         }
-
-        /* Hexagon Pattern Overlay */
-        .hex-bg {
-            position: absolute;
-            inset: 0;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iMTA0IiB2aWV3Qm94PSIwIDAgNjAgMTA0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik02MCAwaC02MEwzMCA1Mkw2MCAwaC02ME0zMCA1Mkw2MCAxMDRoLTYwTDMwIDUyeiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDM0LCAyMTEsIDIzOCwgMC4wMikiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==');
-            z-index: -1;
-            opacity: 0.5;
-        }
-
-        #root { height: 100%; position: relative; z-index: 10; }
         
         .mono { font-family: 'JetBrains Mono', monospace; }
         
         .glass {
-            background: rgba(8, 14, 28, 0.85);
-            backdrop-filter: blur(24px);
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chat-bubble-user {
+            background-color: var(--user-bubble);
+            color: white;
+            border-radius: 20px 20px 4px 20px;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.25);
+        }
+
+        .chat-bubble-ai {
+            background-color: var(--ai-bubble);
+            color: #efefef;
+            border-radius: 20px 20px 20px 4px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
         }
 
-        .watermark {
-            position: fixed;
-            bottom: 40px;
-            right: 20px;
-            opacity: 0.05;
-            font-size: 11px;
-            pointer-events: none;
-            letter-spacing: 6px;
-            z-index: 1000;
-            writing-mode: vertical-rl;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        /* CRT Scanline Effect */
-        .crt-overlay {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.02));
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.3;
-        }
-
-        .scanline {
-            width: 100%;
-            height: 2px;
-            z-index: 10000;
-            background: rgba(168, 85, 247, 0.1);
-            position: absolute;
-            top: 0;
-            animation: scanlineMove 8s linear infinite;
-            pointer-events: none;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
-        }
-
-        @keyframes scanlineMove {
-            0% { top: -10%; }
-            100% { top: 110%; }
-        }
-
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        .animate-progress {
-            animation: progress 5s linear forwards;
+        /* Accessible touch targets */
+        .touch-target {
+            min-height: 48px;
+            min-width: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Custom UI Buttons */
+        .safe-area-inset-top { padding-top: env(safe-area-inset-top); }
+        .safe-area-inset-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+        /* Focus States */
+        *:focus-visible {
+            outline: 3px solid var(--accent-purple);
+            outline-offset: 2px;
+        }
+
         .btn-sovereign {
             position: relative;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .btn-sovereign::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.2);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-        .btn-sovereign:active::after {
-            animation: ripple 0.4s ease-out;
-        }
-        @keyframes ripple {
-            0% { transform: scale(0, 0); opacity: 0.5; }
-            100% { transform: scale(40, 40); opacity: 0; }
+        
+        .btn-sovereign:active {
+            transform: scale(0.96);
         }
 
-        /* Focus Ring Accessibility */
-        *:focus-visible {
-            outline: 2px solid var(--accent-purple);
-            outline-offset: 2px;
+        /* Watermark */
+        .watermark-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            font-size: 15vw;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            transform: rotate(-15deg);
         }
     </style>
 <script type="importmap">
@@ -159,9 +119,7 @@
 </script>
 </head>
 <body>
-    <div class="hex-bg"></div>
-    <div class="crt-overlay"></div>
-    <div class="scanline"></div>
+    <div class="watermark-overlay mono">rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU</div>
     <div id="root"></div>
 </body>
 </html>

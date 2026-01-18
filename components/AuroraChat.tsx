@@ -7,6 +7,8 @@ interface Props {
   isAdmin: boolean;
 }
 
+const UNIVERSAL_ID = "rp_XSxeEG0hHDLrznQnGcQJ7ma0edt5WfwU";
+
 const AuroraChat: React.FC<Props> = ({ messages, onSendMessage, isAdmin }) => {
   const [input, setInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -32,75 +34,73 @@ const AuroraChat: React.FC<Props> = ({ messages, onSendMessage, isAdmin }) => {
   };
 
   return (
-    <div className="flex flex-col h-full overflow-hidden relative">
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.02] pointer-events-none select-none z-0">
-        <div className="text-[80px] font-black mono rotate-[-45deg] leading-none text-center">
-          OFFICIAL USE ONLY<br/>ERVIN RADOSAVLEVICI<br/>PROFIT SHARE 50%
-        </div>
-      </div>
-
+    <div className="flex flex-col h-full overflow-hidden" role="log" aria-label="Conversation Thread" aria-live="polite">
       <div 
         ref={scrollRef} 
-        className="flex-1 space-y-4 overflow-y-auto pb-6 pr-1 scrollbar-hide touch-pan-y z-10"
+        className="flex-1 space-y-5 overflow-y-auto px-1 pt-6 pb-32 scrollbar-hide"
       >
         {messages.length === 0 && (
-          <div className="text-center py-20 opacity-30 space-y-3">
-            <div className="text-4xl animate-pulse">✨</div>
-            <p className="text-[10px] mono uppercase tracking-[0.3em]">Awaiting Uplink</p>
-            <p className="text-[8px] mono italic">"Aurora encryption active..."</p>
+          <div className="text-center py-24 opacity-40 space-y-4">
+            <div className="text-5xl animate-bounce">🛡️</div>
+            <p className="text-[11px] mono uppercase tracking-[0.3em] font-black">Secure Uplink Established</p>
+            <p className="text-[9px] mono italic font-bold text-slate-500">Awaiting instructions for {UNIVERSAL_ID.slice(0, 8)}...</p>
           </div>
         )}
         {messages.map((msg) => (
-          <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-1 duration-300`}>
-            <div className={`max-w-[85%] rounded-2xl p-3 text-[11px] leading-relaxed shadow-sm relative ${
+          <div 
+            key={msg.id} 
+            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}
+          >
+            <div className={`max-w-[85%] px-5 py-3.5 text-sm leading-relaxed shadow-lg ${
               msg.role === 'user' 
-                ? 'bg-slate-800 border border-slate-700 text-slate-200 rounded-tr-none' 
-                : `${isAdmin ? 'bg-purple-900/20 border border-purple-500/30 shadow-[0_0_20px_rgba(168,85,247,0.05)]' : 'bg-slate-900/60 border border-slate-800'} text-slate-300 rounded-tl-none`
+                ? 'chat-bubble-user' 
+                : 'chat-bubble-ai'
             }`}>
               {msg.role === 'assistant' && (
-                <div className="flex items-center space-x-2 mb-1">
-                  <span className={`text-[8px] font-bold mono uppercase ${isAdmin ? 'text-purple-400' : 'text-slate-500'}`}>
-                    Aurora {isAdmin ? '(Production)' : '(Decoy)'}
+                <div className="flex items-center space-x-2 mb-2">
+                  <span className={`text-[9px] font-black mono uppercase ${isAdmin ? 'text-purple-400' : 'text-slate-500'}`}>
+                    Sovereign_{UNIVERSAL_ID.slice(0, 4)}
                   </span>
-                  {msg.isDecoy ? (
-                    <span className="text-[7px] text-rose-800 mono font-bold bg-rose-500/5 px-1 rounded border border-rose-500/10 uppercase">Security Decoy</span>
-                  ) : (
-                    <span className="text-[7px] text-emerald-400 mono font-bold bg-emerald-500/5 px-1 rounded border border-emerald-500/10 uppercase">Legal Official</span>
+                  {!msg.isDecoy && (
+                    <span className="text-[7px] text-emerald-400 mono font-black bg-emerald-500/10 px-1.5 py-0.5 rounded-full border border-emerald-500/20 uppercase tracking-tighter">Production_Link</span>
                   )}
                 </div>
               )}
-              <div className="mono whitespace-pre-line break-words">{msg.content}</div>
-              <div className="flex justify-between items-center mt-2">
-                <div className="text-[6px] text-slate-700 mono uppercase">Nexus Protocol 78B</div>
-                <div className="text-[7px] text-slate-600 mono">
-                  {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </div>
+              <div className="whitespace-pre-line break-words font-medium">{msg.content}</div>
+              <div className={`text-[8px] mt-2 font-black mono uppercase flex justify-between items-center ${msg.role === 'user' ? 'text-white/40' : 'text-slate-600'}`}>
+                <span>{new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                <span className="ml-4 opacity-50">{UNIVERSAL_ID.slice(-6)}</span>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-2 relative pb-4 z-10">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onFocus={() => setTimeout(scrollToBottom, 300)}
-          placeholder="Enter Command..."
-          className="w-full bg-slate-900/80 border border-slate-800 rounded-2xl px-5 py-4 text-xs mono text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-rose-500/30 transition-all shadow-xl"
-          autoComplete="off"
-        />
-        <button 
-          type="submit"
-          disabled={!input.trim()}
-          className="absolute right-2 top-2 bottom-6 px-4 rounded-xl bg-slate-800 text-slate-400 hover:text-rose-400 transition-all border border-slate-700 disabled:opacity-30"
+      <div className="fixed bottom-24 left-4 right-4 z-40">
+        <form 
+          onSubmit={handleSubmit} 
+          className="flex items-center space-x-2 bg-black/80 backdrop-blur-2xl border border-white/15 rounded-full p-1.5 shadow-2xl ring-1 ring-white/5"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </button>
-      </form>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Command Sovereign..."
+            className="flex-1 bg-transparent border-none outline-none px-6 py-4 text-sm text-white placeholder:text-slate-600 focus:ring-0 font-medium"
+            aria-label="Type message"
+          />
+          <button 
+            type="submit"
+            disabled={!input.trim()}
+            className="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center transition-all active:scale-90 disabled:opacity-20 disabled:grayscale shadow-lg shadow-purple-900/30"
+            aria-label="Send"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

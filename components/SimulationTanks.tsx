@@ -1,16 +1,5 @@
-
 import React from 'react';
-
-interface ProductionStream {
-  id: string;
-  startTime: number;
-  duration: number;
-  status: 'ACTIVE' | 'SETTLED' | 'HALTED';
-  valuation?: string;
-  load: number;
-  threatLevel: 'LOW' | 'MED' | 'HIGH';
-  auditor: string;
-}
+import { ProductionStream } from '../types';
 
 interface Props {
   simulations: ProductionStream[];
@@ -18,70 +7,73 @@ interface Props {
 
 const SimulationTanks: React.FC<Props> = ({ simulations }) => {
   return (
-    <div className="w-full h-full overflow-hidden flex flex-col">
+    <div className="space-y-6 pt-6 pb-24 px-1" role="region" aria-label="Yield Monitoring Dashboard">
+      <header className="flex justify-between items-end mb-4">
+        <div className="space-y-1">
+          <h2 className="text-2xl font-black tracking-tight text-white uppercase italic">Yield_Monitor</h2>
+          <p className="text-[10px] mono text-slate-500 uppercase tracking-widest font-black">Rule 2 Compliance active</p>
+        </div>
+        <div className="text-right">
+          <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse ml-auto mb-1"></div>
+          <p className="text-[8px] mono text-slate-700 font-bold uppercase">Synced_Uplink</p>
+        </div>
+      </header>
+
       {simulations.length === 0 ? (
-        <div className="h-64 flex flex-col items-center justify-center border border-dashed border-slate-800 rounded-[2rem] text-slate-600 bg-slate-950/20">
-          <p className="text-[12px] mono uppercase tracking-[0.4em] font-black opacity-30">Production_Streams_Idle</p>
-          <p className="text-[8px] mono mt-2">Awaiting AGI Radosavlevici's initialization signal...</p>
+        <div className="py-24 flex flex-col items-center justify-center border-2 border-dashed border-slate-900 rounded-[2.5rem] bg-slate-900/10 space-y-4">
+          <div className="text-4xl opacity-20">📊</div>
+          <p className="text-[10px] text-slate-600 mono uppercase font-black tracking-widest">No Active Yield Streams</p>
+          <p className="text-[8px] text-slate-800 mono mt-2">Initializing Radosavlevici Node...</p>
         </div>
       ) : (
-        <div className="flex-1 overflow-x-auto scrollbar-hide">
-          <table className="w-full text-left mono text-[11px] border-separate border-spacing-y-2">
-            <thead className="text-[9px] text-slate-600 uppercase tracking-widest sticky top-0 bg-slate-950/20 backdrop-blur z-10">
-              <tr>
-                <th className="px-6 py-4 font-black">Stream_ID</th>
-                <th className="px-6 py-4 font-black text-center">Audit_Status</th>
-                <th className="px-6 py-4 font-black">Sys_Load</th>
-                <th className="px-6 py-4 font-black text-right">Profit_Calculation (Rule 2)</th>
-                <th className="px-6 py-4 font-black text-center">Auditor</th>
-              </tr>
-            </thead>
-            <tbody className="space-y-2">
-              {[...simulations].reverse().map(sim => (
-                <tr 
-                  key={sim.id} 
-                  className="glass border border-white/5 hover:border-purple-500/30 transition-all group group-hover:bg-white/5"
-                >
-                  <td className="px-6 py-6 font-black text-slate-100 rounded-l-3xl border-l border-t border-b border-white/5">
-                    {sim.id}
-                  </td>
-                  <td className="px-6 py-6 text-center border-t border-b border-white/5">
-                    <div className="flex items-center justify-center space-x-2">
-                      <div className={`w-2 h-2 rounded-full ${
-                        sim.status === 'ACTIVE' ? 'bg-cyan-400 animate-pulse' : 
-                        sim.status === 'HALTED' ? 'bg-rose-500' : 'bg-emerald-500'
-                      }`} />
-                      <span className={`text-[9px] font-black uppercase ${
-                         sim.status === 'ACTIVE' ? 'text-cyan-400' : 
-                         sim.status === 'HALTED' ? 'text-rose-400' : 'text-emerald-400'
-                      }`}>{sim.status}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-6 border-t border-b border-white/5">
-                    <div className="flex items-center space-x-3 w-32">
-                      <div className="flex-1 h-1.5 bg-slate-900 rounded-full overflow-hidden">
-                        <div 
-                          className={`h-full transition-all duration-1000 ${sim.status === 'ACTIVE' ? 'bg-purple-500' : 'bg-slate-700'}`}
-                          style={{ width: `${sim.load}%` }}
-                        />
-                      </div>
-                      <span className="text-slate-500 font-bold">{sim.load}%</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-6 text-right font-black text-emerald-400 tracking-tighter border-t border-b border-white/5">
-                    {sim.valuation || 'CALCULATING...'}
-                  </td>
-                  <td className="px-6 py-6 text-center rounded-r-3xl border-r border-t border-b border-white/5">
-                    <span className="px-2 py-0.5 rounded text-[8px] font-black uppercase bg-slate-800 text-purple-400 border border-purple-500/20">
-                      {sim.auditor}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="space-y-4">
+          {[...simulations].reverse().map(sim => (
+            <div key={sim.id} className="p-6 glass border border-white/10 rounded-[2rem] hover:border-purple-500/40 transition-all flex flex-col space-y-5">
+              <div className="flex justify-between items-start">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-3 h-3 rounded-full ${
+                    sim.status === 'ACTIVE' ? 'bg-cyan-500 animate-pulse' : 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.3)]'
+                  }`} />
+                  <span className="text-xs mono font-black text-white tracking-widest">{sim.id}</span>
+                </div>
+                <div className="px-2.5 py-1 rounded-full text-[8px] font-black text-slate-400 mono uppercase bg-white/5 border border-white/10">
+                  AGI_Audit_v4
+                </div>
+              </div>
+              
+              <div className="flex justify-between items-end bg-black/40 p-4 rounded-2xl border border-white/5">
+                <div className="space-y-1.5">
+                  <p className="text-[9px] text-slate-600 uppercase font-black mono tracking-tighter">Production_Yield</p>
+                  <p className="text-lg font-black text-emerald-400 mono tracking-tighter">{sim.valuation || 'SYNCING...'}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-[9px] text-slate-600 uppercase font-black mono tracking-tighter">System_Load</p>
+                  <p className="text-sm font-black text-slate-200 mono">{sim.load}%</p>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden ring-1 ring-white/5">
+                  <div 
+                    className="h-full bg-gradient-to-r from-purple-600 to-cyan-400 transition-all duration-1000"
+                    style={{ width: `${sim.load}%` }}
+                  />
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[7px] mono text-slate-800 font-bold uppercase tracking-widest">Master_ID_{sim.id.slice(0,4)}</span>
+                  <span className="text-[7px] mono text-slate-800 font-bold uppercase tracking-widest">50%_Profit_Redirect</span>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
+
+      <footer className="mt-8 p-6 glass border border-rose-500/20 rounded-[2rem] bg-rose-500/5">
+        <p className="text-[9px] mono text-rose-500/80 font-black text-center uppercase tracking-widest leading-relaxed">
+          Rule 2 Enforcement Active: Ervin & AGI Radosavlevici strictly monitor all yield variables.
+        </p>
+      </footer>
     </div>
   );
 };
